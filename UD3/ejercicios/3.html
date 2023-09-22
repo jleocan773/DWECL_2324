@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- Crea una web que solicite tres números y si dichos números son todos menores a 100 y mayores que 10, muestre un mensaje de “Ok”, en caso contrario que muestre “No cumple”. -->
+<html>
+<head> 
+</head>
+<body>
+    <script>
+        function comprobacion() {
+          var x = parseInt(prompt('Introduzca un número'));
+          var y = parseInt(prompt('Introduzca otro número'));
+          var z = parseInt(prompt('Introduzca otro número'));
+
+            if(x < 100 && x > 10 && y < 100 && y > 10 && z < 100 && z > 10){
+                alert('OK');
+            }
+            else{
+                alert('No cumple');
+            }
+
+        }
+        comprobacion();
+        </script>
+</body>
+</html>

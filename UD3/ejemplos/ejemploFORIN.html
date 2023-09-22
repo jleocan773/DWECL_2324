@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>Haz click para recorrer las propiedades del objeto.</p>
+<button onclick="myFunction()">Click</button>
+<p id="demo"></p>
+<script>
+function myFunction() {
+  var persona = {nombre:"Juan", apellido:"Gallego", edad:39};  
+  var text = "";
+  var x;
+  // Con el for in recorremos las propiedades de los arrays
+  for (x in persona) {
+    text += persona[x] + " ";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+</body>
+</html>

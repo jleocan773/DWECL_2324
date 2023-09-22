@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- Crea una web que solicite tres números y los muestre de menor a mayor. -->
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script> 
+        function ordenMayor() {
+          var x = prompt('Introduzca un número');
+          var y = prompt('Introduzca otro número');
+          var z = prompt('Introduzca otro número');
+
+            if(x < y && x < z && y < z){
+                alert(x + ' es menor que ' + y + ' que es menor que ' + z);
+            }
+            else if (x < y && x < z && z < y){
+                alert(x + ' es menor que ' + z + ' que es menor que ' + y);
+            }
+            else if (y < x && y < z && x < z){
+                alert(y + ' es menor que ' + x + ' que es menor que ' + z);
+            }
+            else if (y < x && y < z && z < x){
+                alert(y + ' es menor que ' + z + ' que es menor que ' + x);
+            }
+            else if (z < x && z < y && x < y){
+                alert(z + ' es menor que ' + x + ' que es menor que ' + y);
+            }
+            else if (z < x && z < y && y < x){
+                alert(z + ' es menor que ' + y + ' que es menor que '+ x);
+            }
+            
+        }
+        ordenMayor();
+        </script>
+</body>
+</html>
