@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <!-- Crea una web que reciba un número y calcule el factorial de ese número.. -->
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="background-color: black;"> 
+    <script>
+        function factorial(){
+            var num = Number(prompt('Introduce un número'))
+            var resultado = 1;
+
+            for(i = num; i >=2; i--){
+                resultado = resultado*i;
+            }
+            alert(resultado);
+
+        }
+        factorial();
+    </script>
+</body>
+</html>

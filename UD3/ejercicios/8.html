@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <!-- Crea una web que calcule la descomposición en factores primos de un número solicitado al inicio. Es decir: de 18 responderá (2 * 3 * 3 )... -->
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="background-color: black;"> 
+    <script>
+        function factorial(){
+            var num = Number(prompt('Introduce un número'))
+            var resultado = 1;
+
+            for(i = num; i >=2; i--){
+                resultado = resultado*i;
+            }
+            alert(resultado);
+
+        }
+        factorial();
+    </script>
+</body>
+</html>
