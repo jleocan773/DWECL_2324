@@ -11,7 +11,7 @@
         var num = Number(prompt("Introduce un número"));
         var resultado = 1;
 
-        if (num != Number) {
+        if (isNan(num)) {
           alert("No has introducido un número");
         } else {
           for (i = num; i >= 2; i--) {

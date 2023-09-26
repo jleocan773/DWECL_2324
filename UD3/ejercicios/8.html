@@ -7,16 +7,18 @@
   </head>
   <body style="background-color: black">
     <script>
-      function factorial() {
+      function divisionPrimos() {
         var num = Number(prompt("Introduce un número"));
-        var resultado = 1;
 
-        for (i = num; i >= 2; i--) {
-          resultado = resultado * i;
+        if (isNan(num)) {
+          alert("No has introducido un número");
+        } else {
+          for (i = num; i >= 2; i--) {
+            resultado = resultado * i;
+          }
+          alert(resultado);
         }
-        alert(resultado);
-      }
-      factorial();
+        divisionPrimos();
     </script>
   </body>
 </html>

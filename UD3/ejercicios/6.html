@@ -2,10 +2,36 @@
 <!-- Crea una web que solicite los coeficientes de una ecuación de segundo grado (ax2 +bx + c = 0) y realice los cálculos necesarios para mostrar los resultados. 
     (Comprobad que para los siguientes coeficientes a=1, b= - 5 , y c= 6 los resultados deben ser x1= 3 y x2= 2 )-->
 <html>
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body style="background-color: black">
+    <script>
+      function resolverEcuacionSegundoGrado() {
+        var a = Number(prompt("Introduce el coeficiente para 'a'"));
+        var b = Number(prompt("Introduce el coeficiente para 'b'"));
+        var c = Number(prompt("Introduce el coeficiente para 'c'"));
+
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+          alert("No has introducido un número.");
+        } else {
+          var discriminante = b * b - 4 * a * c;
+
+          if (discriminante > 0) {
+            var raizDiscriminante = Math.sqrt(discriminante);
+            var x1 = (-b + raizDiscriminante) / (2 * a);
+            var x2 = (-b - raizDiscriminante) / (2 * a);
+            alert("Las soluciones son x1 = " + x1 + " y x2 = " + x2);
+          } else if (discriminante === 0) {
+            var x = -b / (2 * a);
+            alert("La solución doble es x = " + x);
+          } else {
+            alert("La ecuación no tiene soluciones reales.");
+          }
+        }
+      }
+
+      resolverEcuacionSegundoGrado();
+    </script>
+  </body>
 </html>
