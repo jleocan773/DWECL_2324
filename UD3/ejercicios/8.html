@@ -7,18 +7,31 @@
   </head>
   <body style="background-color: black">
     <script>
-      function divisionPrimos() {
+      function divPrimos() {
         var num = Number(prompt("Introduce un número"));
+        var listaNumeros = "";
 
-        if (isNan(num)) {
+        if (isNaN(num)) {
           alert("No has introducido un número");
         } else {
-          for (i = num; i >= 2; i--) {
-            resultado = resultado * i;
+          for (var i = 2; num != 1;) {
+            if (num % i == 0){
+              num = num / i;
+              if (num != 1){
+                listaNumeros += i + " * ";
+              }
+              else {
+                listaNumeros += i;  
+            }
           }
-          alert(resultado);
+          else{
+            i++;
+          }
         }
-        divisionPrimos();
+      }
+      alert(listaNumeros);
+    }
+    divPrimos();
     </script>
   </body>
 </html>
