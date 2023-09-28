@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: black" ;>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Figuras</title>
+	</head>
+	<body>
+		<script>
+			function menu() {
+				var opcion;
+				var figura;
+				var radio;
+				var altura;
+				var lado;
+
+				var opcion = prompt(
+					"1 : Elige una figura entre Cubo, Esfera, y Cilindro\n" +
+						"2 : Introduzca los parámetros necesarios\n" +
+						"3 : Calcular Volumen\n" +
+						"4 : Calcular Área\n" +
+						"5 : Finalizar programa"
+				);
+				if (opcion == 1) {
+					elegirFigura();
+					alert(figura);
+				} else if (opcion == 2) {
+					introducirValores();
+					alert(radio + altura + lado);
+				} else if (opcion == 3) {
+					calcularVolumen();
+					alert("Aquí irá el volumen");
+				} else if (opcion == 4) {
+					calcularArea();
+					alert("Aquí irá el área");
+				} else if (opccion == 5) {
+					close;
+				}
+
+				function elegirFigura() {
+					figura = prompt("1 : Cubo\n" + "2 : Esfera\n" + "3 : Cilindro");
+				}
+			}
+
+			menu();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>FuncionesFlechas</title>
+	</head>
+	<body>
+		<script>
+			//Usando la palabra clave Function podemos definir una función a través de un constructor.
+
+			// var producto = new Function("a", "b", "return a * b");
+			// var x = producto(4, 3);
+
+			//Realmente las funciones son objetos y por tanto como ya veremos más adelante poseen propiedades y métodos.
+
+			//Con ES6 se puede definir una función usando los operadores “=>”  como muestra el ejemplo:
+			// const a = (x, y) => {
+			// 	return x * y;
+			// };
+
+			// const a = (x, y) => {
+			// 	var b = 4;
+			// 	return x * y * b;
+			// };
+
+			//Incluso podemos omitir la palabra clave return
+			const a = (x, y) => x * y;
+			alert("Producto = " + a(2, 4));
+
+		</script>
+	</body>
+</html>

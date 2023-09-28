@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			var x = 0; // Alcance global
+			function cambia() {
+				var x = 1; // Alcance local a función
+			}
+			cambia();
+			alert("Valor de x : " + x);
+			{
+				let x = 3; // Alcance de bloque
+			}
+			alert("Valor de x : " + x);
+		</script>
+	</head>
+	<body></body>
+</html>

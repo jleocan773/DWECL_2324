@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			//Funciona pero no es lo más correcto porque cualquier código puede cambiar el valor de contador sin llamar a la función. Probamos con variable local :
+			var contador = 0;
+			function incrementa() {
+				// Código ....
+				contador++;
+			}
+			incrementa();
+			incrementa();
+			alert("Contador = " + contador); // Imprime 2
+
+			// var contador = 0;
+			// function incrementa() {
+			// 	// Código ....
+			// 	var contador = 0;
+			// 	contador++;
+			// 	// Otro código ...
+			// }
+			// incrementa();
+			// incrementa();
+			// alert("Contador = " + contador); // Imprime 0 ...
+
+			//Debería de imprimir 2, pero se está haciendo uso de la variable global. Podríamos definir sólo “contador” local pero se iniciaría a “0” con cada llamada a la función.
+		</script>
+	</head>
+	<body></body>
+</html>
