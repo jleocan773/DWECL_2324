@@ -11,18 +11,17 @@
 
 			function menu() {
 				var opcion;
-				var lado;
-				var radio;
-				var altura;
 
 				while (true) {
-					opcion = Number(prompt(
-						"1 : Elige una figura entre Cubo, Esfera, y Cilindro\n" +
-							"2 : Introduzca los parámetros necesarios\n" +
-							"3 : Calcular Volumen\n" +
-							"4 : Calcular Área\n" +
-							"5 : Finalizar programa"
-					));
+					opcion = Number(
+						prompt(
+							"1 : Elige una figura entre Cubo, Esfera, y Cilindro\n" +
+								"2 : Introduzca los parámetros necesarios\n" +
+								"3 : Calcular Volumen\n" +
+								"4 : Calcular Área\n" +
+								"5 : Finalizar programa"
+						)
+					);
 
 					if (opcion == 1) {
 						figura = elegirFigura();
@@ -30,20 +29,18 @@
 					} else if (opcion == 2) {
 						if (figura == 1) {
 							lado = introducirValores();
-
 							alert(lado);
 						} else if (figura == 2) {
 							radio = introducirValores();
-
 							alert(radio);
 						} else if (figura == 3) {
 							var [radio, altura] = introducirValores();
-
 							alert(radio);
 							alert(altura);
 						}
 					} else if (opcion == 3) {
-						calcularVolumen();
+						calcularArea();
+						alert(area);
 					} else if (opcion == 4) {
 						calcularArea();
 						alert(area);
@@ -54,7 +51,9 @@
 			}
 
 			function elegirFigura() {
-				var figura = Number(prompt("1 : Cubo\n" + "2 : Esfera\n" + "3 : Cilindro"));
+				var figura = Number(
+					prompt("1 : Cubo\n" + "2 : Esfera\n" + "3 : Cilindro")
+				);
 				return figura;
 			}
 
@@ -74,22 +73,24 @@
 				}
 			}
 
-			function calcularVolumen() {
-
-			}
+			function calcularVolumen() {}
 
 			function calcularArea() {
 				// Este método no pilla el área, REVISAR
 				if (figura == 1) {
-				
+
+					return area;
 				} else if (figura == 2) {
-					area = 4 * Math.PI * Math.pow(radio, 2);
+					var radio = 5;
+					area = 5 * 2;
+					return area;
 				} else if (figura == 3) {
-					
+
+					return area;
 				} else {
-					alert("Datos Incorrectos");
+
+					return area;
 				}
-				return area;
 			}
 
 			menu();
