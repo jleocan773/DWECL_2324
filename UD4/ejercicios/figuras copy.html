@@ -44,10 +44,9 @@
 						}
 					} else if (opcion == 3) {
 						calcularVolumen();
-						alert("Aquí irá el volumen");
 					} else if (opcion == 4) {
 						calcularArea();
-						alert("Aquí irá el área");
+						alert(area);
 					} else if (opcion == 5) {
 						break;
 					}
@@ -80,19 +79,17 @@
 			}
 
 			function calcularArea() {
-				if (figura == "Cubo") {
-					var lado = Number(prompt("Introduzca el Lado del Cubo: "));
-					return lado;
-				} else if (figura == "Esfera") {
-					var radio = Number(prompt("Introduzca el Radio de la Esfera: "));
-					return radio;
-				} else if (figura == "Cilindro") {
-					var radio = Number(prompt("Introduzca el Radio del Cilindro: "));
-					var altura = Number(prompt("Introduzca la Altura del Cilindroo: "));
-					return [radio, altura];
+				// Este método no pilla el área, REVISAR
+				if (figura == 1) {
+				
+				} else if (figura == 2) {
+					area = 4 * Math.PI * Math.pow(radio, 2);
+				} else if (figura == 3) {
+					
 				} else {
 					alert("Datos Incorrectos");
 				}
+				return area;
 			}
 
 			menu();
