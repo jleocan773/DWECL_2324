@@ -3,68 +3,92 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>PRUEBAS</title>
+		<title>Figuras :D</title>
 		<script>
 			document.addEventListener("DOMContentLoaded", function () {
-				document.documentElement.style.backgroundColor = "black";
+				document.body.style.backgroundImage = 'url("https://static.wikia.nocookie.net/amongus/images/1/16/Rojo.png/revision/latest?cb=20210613093338&path-prefix=es")';
+				document.body.style.backgroundSize = "cover";
 			});
 
 			function menu() {
-				var opcion;
-				var lado;
-				var radio;
-				var altura;
+				var opcion = 0;
+				var figura = 0;
+				var lado = 0;
+				var radio = 0;
+				var altura = 0;
+				var area = 0;
 
 				while (true) {
-					opcion = Number(prompt(
-						"1 : Elige una figura entre Cubo, Esfera, y Cilindro\n" +
-							"2 : Introduzca los parámetros necesarios\n" +
-							"3 : Calcular Volumen\n" +
-							"4 : Calcular Área\n" +
-							"5 : Finalizar programa"
-					));
+					opcion = Number(
+						prompt(
+							"1 : Elige una figura entre Cubo, Esfera, y Cilindro\n" +
+								"2 : Introduzca los parámetros necesarios\n" +
+								"3 : Calcular Volumen\n" +
+								"4 : Calcular Área\n" +
+								"5 : Finalizar programa"
+						)
+					);
 
-					if (opcion == 1) {
-						figura = elegirFigura();
-						alert("Has elegido " + figura);
-					} else if (opcion == 2) {
-						if (figura == 1) {
-							lado = introducirValores();
+					switch (opcion) {
+						case 1:
+							figura = elegirFigura();
+							if (isNaN(figura) || figura > 3 || figura < 1) {
+								alert("Elige un número del 1 al 3 para la figura");
+							} else {
+								alert("Has elegido " + figura);
+								break;
+							}
 
-							alert(lado);
-						} else if (figura == 2) {
-							radio = introducirValores();
+						case 2:
+							if (figura == 0) {
+								alert("Debes elegir una figura primero (opción 1).");
+							} else {
+								if (figura == 1) {
+									lado = introducirValores(figura);
+									alert(lado);
+								} else if (figura == 2) {
+									radio = introducirValores(figura);
+									alert(radio);
+								} else if (figura == 3) {
+									[radio, altura] = introducirValores(figura);
+									alert(radio);
+									alert(altura);
+								}
+							}
+							break;
 
-							alert(radio);
-						} else if (figura == 3) {
-							var [radio, altura] = introducirValores();
+						case 3:
+							volumen = calcularVolumen(figura, lado, radio, altura);
+							alert(volumen);
+							break;
 
-							alert(radio);
-							alert(altura);
-						}
-					} else if (opcion == 3) {
-						calcularVolumen();
-						alert("Aquí irá el volumen");
-					} else if (opcion == 4) {
-						calcularArea();
-						alert("Aquí irá el área");
-					} else if (opcion == 5) {
-						break;
+						case 4:
+							area = calcularArea(figura, lado, radio, altura);
+							alert(area);
+							break;
+
+						case 5:
+							return;
+
+						default:
+							alert("Opción no válida. Por favor, elige una opción válida.");
 					}
 				}
 			}
 
 			function elegirFigura() {
-				var figura = Number(prompt("1 : Cubo\n" + "2 : Esfera\n" + "3 : Cilindro"));
+				var figura = Number(
+					prompt("1 : Cubo\n" + "2 : Esfera\n" + "3 : Cilindro")
+				);
 				return figura;
 			}
 
-			function introducirValores() {
+			function introducirValores(figura) {
 				if (figura == 1) {
 					var lado = Number(prompt("Introduzca el Lado del Cubo: "));
 					return lado;
 				} else if (figura == 2) {
-					var radio = Number(prompt("Introduzca el Radio de la Esfera: "));
+					radio = Number(prompt("Introduzca el Radio de la Esfera: "));
 					return radio;
 				} else if (figura == 3) {
 					var radio = Number(prompt("Introduzca el Radio del Cilindro: "));
@@ -75,23 +99,29 @@
 				}
 			}
 
-			function calcularVolumen() {
-
+			function calcularVolumen(figura, lado, radio, altura) {
+				if (figura == 1) {
+					var volumen = Math.pow(lado, 3);
+					return volumen;
+				} else if (figura == 2) {
+					var volumen = (4 / 3) * Math.PI * Math.pow(radio, 3);
+					return volumen;
+				} else if (figura == 3) {
+					var volumen = Math.PI * Math.pow(radio, 2) * altura;
+					return volumen;
+				}
 			}
 
-			function calcularArea() {
-				if (figura == "Cubo") {
-					var lado = Number(prompt("Introduzca el Lado del Cubo: "));
-					return lado;
-				} else if (figura == "Esfera") {
-					var radio = Number(prompt("Introduzca el Radio de la Esfera: "));
-					return radio;
-				} else if (figura == "Cilindro") {
-					var radio = Number(prompt("Introduzca el Radio del Cilindro: "));
-					var altura = Number(prompt("Introduzca la Altura del Cilindroo: "));
-					return [radio, altura];
-				} else {
-					alert("Datos Incorrectos");
+			function calcularArea(figura, lado, radio, altura) {
+				if (figura == 1) {
+					var area = 6 * Math.pow(lado, 2);
+					return area;
+				} else if (figura == 2) {
+					var area = 4 * Math.PI * Math.pow(radio, 2);
+					return area;
+				} else if (figura == 3) {
+					var area = 2 * Math.PI * radio * (radio + altura);
+					return area;
 				}
 			}
 
