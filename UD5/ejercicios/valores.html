@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Para la moda:
+    a) Puede no haber moda
+    b) Se repite un solo número más que los demás por lo tanto ese es la moda
+        c) Se repiten dos números -> Si existe algún valor entre ellos, serían ambos la moda
+                                  -> Se suman ambos valores y la mitad sería la moda   
+-->
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ejercicio 1 Tema 5</title>
+	</head>
+	<script>
+		function introducirValores() {
+			var arrayNumeros = [];
+
+			while (true) {
+				nuevoNumero = Number(prompt(
+					"Introduzca un número para añadirlo o una letra terminar de introducir números"
+				));
+				if (isNaN(nuevoNumero) || nuevoNumero == 0 || nuevoNumero < 0 || nuevoNumero == null) {
+					break;
+				} else {
+					arrayNumeros.push(nuevoNumero);
+				}
+			}
+			alert(arrayNumeros);
+            alert("Longitud del array: " + arrayNumeros.length);
+            calcularMedia(arrayNumeros);
+		}
+        function  calcularMedia(arrayNumeros){
+            var sumaNumeros = Number(0);
+            var media = Number(arrayNumeros.length);
+            for(i = 0; i < arrayNumeros.length; i++){
+                sumaNumeros += arrayNumeros[i];
+            }
+            alert("La suma de los números es: " + sumaNumeros);
+            alert("La media de la serie de números es: " + sumaNumeros / media);
+        }
+		introducirValores();
+
+	</script>
+	<body></body>
+</html>

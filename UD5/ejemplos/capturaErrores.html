@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<script>
+			// try {
+			//     alert("Hola");
+			//     noExisteFuncion();
+			//     alert ("Adiós");
+			// }
+			// catch(err) {
+			//   alert (err);
+			// }
+			var n = prompt("Introduzca un número : ");
+			try {
+				if (n == "") throw "está vacío";
+				if (isNaN(n)) throw "no es un número";
+				n = Number(n);
+				alert("Se ha introducido el número: " + n);
+			} catch (err) {
+				alert("El valor " + err);
+			} finally {
+				alert("Siempre se ejecuta");
+			}
+		</script>
+	</head>
+	<body></body>
+</html>
