@@ -3,9 +3,10 @@
 	<!-- Para la moda:
     a) Puede no haber moda
     b) Se repite un solo número más que los demás por lo tanto ese es la moda
-        c) Se repiten dos números -> Si existe algún valor entre ellos, serían ambos la moda
-                                  -> Se suman ambos valores y la mitad sería la moda   
--->
+    c) Se repiten dos números 	  → Si existe algún valor entre ellos, serían ambos la moda
+                                  → Se suman ambos valores y la mitad sería la moda   
+
+	-->
 
 	<head>
 		<meta charset="UTF-8" />
@@ -17,30 +18,103 @@
 			var arrayNumeros = [];
 
 			while (true) {
-				nuevoNumero = Number(prompt(
-					"Introduzca un número para añadirlo o una letra terminar de introducir números"
-				));
-				if (isNaN(nuevoNumero) || nuevoNumero == 0 || nuevoNumero < 0 || nuevoNumero == null) {
+				nuevoNumero = Number(
+					prompt(
+						"Introduzca un número para añadirlo o una letra terminar de introducir números"
+					)
+				);
+				if (
+					isNaN(nuevoNumero) ||
+					nuevoNumero == 0 ||
+					nuevoNumero < 0 ||
+					nuevoNumero == null
+				) {
 					break;
 				} else {
 					arrayNumeros.push(nuevoNumero);
 				}
 			}
 			alert(arrayNumeros);
-            alert("Longitud del array: " + arrayNumeros.length);
-            calcularMedia(arrayNumeros);
+			alert("Longitud del array: " + arrayNumeros.length);
+			calcularMedia(arrayNumeros);
+			calcularRango(arrayNumeros);
+			calcularModa(arrayNumeros);
 		}
-        function  calcularMedia(arrayNumeros){
-            var sumaNumeros = Number(0);
-            var media = Number(arrayNumeros.length);
-            for(i = 0; i < arrayNumeros.length; i++){
-                sumaNumeros += arrayNumeros[i];
-            }
-            alert("La suma de los números es: " + sumaNumeros);
-            alert("La media de la serie de números es: " + sumaNumeros / media);
-        }
-		introducirValores();
 
+		function calcularMedia(arrayNumeros) {
+			var sumaNumeros = Number(0);
+			var media = Number(arrayNumeros.length);
+
+			for (i = 0; i < arrayNumeros.length; i++) {
+				sumaNumeros += arrayNumeros[i];
+			}
+
+			alert("La suma de los números es: " + sumaNumeros);
+			alert("La Media de la serie de números es: " + sumaNumeros / media);
+		}
+
+		function calcularRango(arrayNumeros) {
+			var numMayor = Number(0);
+			var numMenor;
+			var rango = Number(0);
+
+			for (i = 0; i < arrayNumeros.length; i++) {
+				if (arrayNumeros[i] > numMayor) {
+					numMayor = arrayNumeros[i];
+				}
+			}
+
+			numMenor = numMayor;
+
+			for (i = 0; i < arrayNumeros.length; i++) {
+				if (arrayNumeros[i] < numMenor) {
+					numMenor = arrayNumeros[i];
+				}
+			}
+
+			rango = numMayor - numMenor;
+
+			alert("El número más grande es: " + numMayor);
+			alert("El número más pequeño es: " + numMenor);
+			alert("El Rango es: " + rango);
+		}
+
+		function calcularModa(arrayNumeros) {
+			var frecuencia = {};
+			var frecuenciaMaxima = 0;
+			var moda;
+			var modas = {};
+
+			for (i = 0; i < arrayNumeros.length; i++) {
+				var numero = arrayNumeros[i];
+
+				if (!frecuencia[numero]) {
+					frecuencia[numero] = 1;
+				} else {
+					frecuencia[numero]++;
+				}
+
+				if (frecuencia[numero] > frecuenciaMaxima) {
+					frecuenciaMaxima = frecuencia[numero];
+					modas = [numero];
+				} else if (
+					frecuencia[numero] == frecuenciaMaxima &&
+					modas.indexOf(numero) == -1
+				) {
+					modas.push(numero);
+				}
+			}
+
+			if (modas.length == 1) {
+				alert("La moda de la serie de números es: " + modas[0]);
+			} else if (modas.length > 1) {
+				alert("Las modas de la serie de números son: " + modas);
+			} else {
+				alert("No hay una moda en la serie de números.");
+			}
+		}
+
+		introducirValores();
 	</script>
 	<body></body>
 </html>
