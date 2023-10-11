@@ -11,7 +11,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Ejercicio 1 Tema 5</title>
+		<title>Pruebas</title>
 	</head>
 	<script>
 		function introducirValores() {
@@ -23,7 +23,12 @@
 						"Introduzca un número para añadirlo o una letra terminar de introducir números"
 					)
 				);
-				if (isNaN(nuevoNumero) || nuevoNumero < 0 || nuevoNumero == null) {
+				if (
+					isNaN(nuevoNumero) ||
+					nuevoNumero == 0 ||
+					nuevoNumero < 0 ||
+					nuevoNumero == null
+				) {
 					break;
 				} else {
 					arrayNumeros.push(nuevoNumero);
@@ -75,38 +80,36 @@
 		}
 
 		function calcularModa(arrayNumeros) {
-			var frecuencia = {};
-			var frecuenciaMaxima = 0;
-			var modas = {};
+    var moda = [];
+    var maxFrecuencia = 0;
 
-			for (i = 0; i < arrayNumeros.length; i++) {
-				var numero = arrayNumeros[i];
+    for (var i = 0; i < arrayNumeros.length; i++) {
+        var numero = arrayNumeros[i];
+        var frecuencia = 1;
 
-				if (!frecuencia[numero]) {
-					frecuencia[numero] = 1;
-				} else {
-					frecuencia[numero]++;
-				}
+        // Comprobar si el número se repite adyacente
+        while (i + 1 < arrayNumeros.length && arrayNumeros[i + 1] === numero) {
+            frecuencia++;
+            i++;
+        }
 
-				if (frecuencia[numero] > frecuenciaMaxima) {
-					frecuenciaMaxima = frecuencia[numero];
-					modas = [numero];
-				} else if (
-					frecuencia[numero] == frecuenciaMaxima &&
-					modas.indexOf(numero) == -1
-				) {
-					modas.push(numero);
-				}
-			}
+        if (frecuencia > maxFrecuencia) {
+            moda = [numero];
+            maxFrecuencia = frecuencia;
+        } else if (frecuencia === maxFrecuencia) {
+            moda.push(numero);
+        }
+    }
 
-			if (frecuenciaMaxima == 1) {
-				alert("No hay una moda en la serie de números.");
-			} else if (modas.length == 1) {
-				alert("La moda de la serie de números es: " + modas[0]);
-			} else if (modas.length > 1) {
-				alert("Las modas de la serie de números son: " + modas);
-			}
-		}
+    if (maxFrecuencia === 1) {
+        alert("No hay moda en la serie de números.");
+    } else {
+        alert("La moda estadística considerando la adyacencia es: " + moda);
+    }
+}
+
+
+
 
 		introducirValores();
 	</script>
