@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Calcular Mediana -->
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ejercicio 1 Tema 6</title>
+	</head>
+	<script>
+		function introducirValores() {
+			var arrayNumeros = [];
+
+			while (true) {
+				nuevoNumero = Number(
+					prompt(
+						"Calculando Mediana: Introduzca un número para añadirlo o una letra terminar de introducir números"
+					)
+				);
+				if (isNaN(nuevoNumero) || nuevoNumero < 0 || nuevoNumero == null) {
+					break;
+				} else {
+					arrayNumeros.push(nuevoNumero);
+				}
+			}
+			alert("Longitud del Array: " + arrayNumeros.length);
+			calcularMediana(arrayNumeros);
+		}
+
+		function calcularMediana(arrayNumeros) {
+			var mediana = Number(0);
+
+			arrayNumeros.sort(function (a,b){return a-b}) ; 
+			alert(arrayNumeros);
+
+			if (arrayNumeros.length % 2 != 0) {
+				mediana = arrayNumeros[arrayNumeros.length / 2 - 0.5];
+			} else if (arrayNumeros.length % 2 == 0){
+				mitadIzquierda = arrayNumeros[arrayNumeros.length / 2 - 1];
+				mitadDerecha = arrayNumeros[arrayNumeros.length / 2];
+
+				mediana = (mitadIzquierda + mitadDerecha) / 2;
+			}
+			alert("La mediana es: " + mediana);
+		}
+
+		introducirValores();
+	</script>
+	<body></body>
+</html>

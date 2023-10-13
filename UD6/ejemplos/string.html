@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>String</title>
+	</head>
+	<body>
+		<script>
+			var x = "hola hola";
+			alert(x.length);
+			//Devuelve 9
+
+			var x = "hola hola";
+			alert(x.search("la")); // Devuelve 2
+
+			var x = "hola que tal";
+			var y = x.slice(5, 8);
+			alert(y); //Muestra “que”
+
+			/*El método replace ( ) reemplaza una cadena por otra. De esta forma sólo cambia la primera coincidencia y distingue entre mayúsculas y minúsculas. 
+            Para encontrar mayúsculas y minúsculas usamos en lugar de “cero” → /cero/i , y para encontrar todas las coincidencias /cero/g */
+			var x = "Todos los alumnos sacarán un cero.";
+			var y = x.replace("cero", "diez");
+			alert(y); // Todos los alumnos sacarán un diez.
+
+			var x = "Hola que tal.";
+			alert(x.toUpperCase()); // Muestra “HOLA QUE TAL.”
+
+			var x = "Hola que tal.";
+			alert(x.charAt(0)); // Muestra “H”
+		</script>
+	</body>
+</html>
