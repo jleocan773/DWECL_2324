@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Arrays Nº Pares e Impares -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ejercicio 2 Tema 6</title>
+	</head>
+	<script>
+		/* 
+        El orden del programa es el siguiente:
+        Se inicia el programa y se pide al usuario que introduzca números.
+        Estos números se guardarán en el array "arrayNumeros", cuándo el usuario quiera
+        dejar de meter números en este primer array presionará S, después de esto se empezará a meter
+        números en el array "subArray", y cuándo se terminen de meter números en este subArray, este subArray 
+        se juntará con "arrayNumeros" para hacer que "arrayNumeros" sea un array bidimensional.
+
+        Así que, el programa primero recibe una serie de números, el usuario presiona S para meter otra serie de números, 
+        cómo hago que, una vez presionada S, se empiecen a meter los números en este segundo array "subArray"?
+        */
+
+		function introducirValores() {
+			var arrayNumeros = [];
+			var subArray = [];
+			var nuevoNumero;
+
+			while (true) {
+				nuevoNumero = prompt(
+					"Introduce un número para añadirlo a la serie de números. Introduce F para Finalizar. Introduce S para la Siguiente serie de números"
+				);
+
+				if (
+					nuevoNumero == "F" ||
+					nuevoNumero == "f" ||
+					nuevoNumero < 0 ||
+					nuevoNumero == null
+				) {
+					if (subArray.length > 0) {
+						// Concatenar subArray al arrayNumeros
+						arrayNumeros = arrayNumeros.concat(subArray);
+					}
+					break;
+				} else if (nuevoNumero == "S" || nuevoNumero == "s") {
+					if (subArray.length > 0) {
+						// Concatenar subArray al arrayNumeros
+						arrayNumeros = arrayNumeros.concat(subArray);
+					}
+					subArray = []; // Reiniciar subArray
+				} else if (isNaN(nuevoNumero)) {
+					alert("Introduce un número");
+				} else {
+					// Agregar el número a subArray
+					subArray.push(Number(nuevoNumero));
+				}
+			}
+
+			alert(arrayNumeros);
+		}
+
+		introducirValores();
+
+        function introducirValores() {
+    var arrayNumeros = [];
+    var nuevaDimension = [];
+
+    while (true) {
+        var nuevoNumero = prompt(
+            "Introduce un número para añadirlo a la serie de números. Introduce S para la Siguiente serie de números. Introduce F para Finalizar"
+        );
+
+        if (nuevoNumero === "F" || nuevoNumero === "f") {
+            break;
+        } else if (isNaN(nuevoNumero) || nuevoNumero < 0 || nuevoNumero == null){
+            alert("Introduce un número positivo");
+        } else if (nuevoNumero === "S" || nuevoNumero === "s") {
+            // Si se introduce "S", agregamos la dimensión actual a arrayNumeros
+            arrayNumeros.push(nuevaDimension);
+            // Creamos una nueva dimensión vacía para los siguientes números
+            nuevaDimension = [];
+        } else {
+            // Convertimos el valor introducido a número y lo añadimos a la dimensión actual
+            nuevaDimension.push(Number(nuevoNumero));
+        }
+    }
+
+    // Mostramos arrayNumeros después de que el usuario termine de ingresar números
+    alert(arrayNumeros);
+}
+
+	</script>
+	<body></body>
+</html>
