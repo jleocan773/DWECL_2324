@@ -23,22 +23,31 @@
             break;
           }
 
+          //Separamos la entrada por comas, y  guardamos los números en la fila
           var fila = entrada.split(",");
+          //Creamos un array en el que guardaremos los números en la variable fila
           var filaNumeros = [];
-		  //Variable booleana para controlar si un array tiene un número negativo
+          //Variable booleana para controlar si un array tiene un número negativo
           var filaContieneNegativos = false;
 
+          //Recorremos el array fila para ir añadiendo los números a filaNumeros más tarde
           for (var i = 0; i < fila.length; i++) {
             var numero = Number(fila[i]);
+
+            //En caso de que no se admitan números negativos / número menor que cero
             if (numero < 0) {
               alert(
                 "No se permite introducir números negativos, se ignorarán estos números."
               );
               filaContieneNegativos = true;
               break;
-            } else filaNumeros.push(numero);
+            }
+            //De lo contrario, se añade el número al array filaNumeros
+            else filaNumeros.push(numero);
           }
 
+          //Si no contiene negativos, es decir, si filaContieneNegativos es falso, se añade a la matriz
+          //sin este bloque de código pasaría a la siguiente zona siempre
           if (!filaContieneNegativos) {
             matriz.push(filaNumeros);
             zonaActual++;
@@ -54,17 +63,23 @@
         var media = 0;
         var sumaTotal = 0;
 
+        //Estructura básica para recorrer un array de dos dimensiones
         for (var i = 0; i < matriz.length; i++) {
+          //"sumaNumeros" se declara aquí para que se resetee con cada iteración, porque queremos la media de cada dimensión
           var sumaNumeros = 0;
           for (var j = 0; j < matriz[i].length; j++) {
+            //"sumaNumeros" será igual a la suma de los elementos actuales de la dimension actual
             sumaNumeros += matriz[i][j];
           }
 
+          //Para calcular la media pillamos la suma de todos los numeros en "sumaNumero" y lo dividimos por la longitud de dimensión actual
           media = sumaNumeros / matriz[i].length;
+          //Para  la "sumaTotal" de todas las dimensiones vamos a usar "media"
           sumaTotal += media;
           alert("Media de la ZONA " + zonaActual + " = " + media);
           zonaActual++;
         }
+        //Mostramos el valor de "sumaTotal" una vez terminamos de recorrer el array
         alert("Media total de TODAS las ZONAS: " + sumaTotal);
       }
 
