@@ -3,17 +3,20 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Pares e Impares</title>
+		<title>Examen 20-21</title>
 	</head>
 	<body>
 		<script>
-			// Función para solicitar valores y guardarlos en una matriz de dos dimensiones
 			function obtenerValores() {
 				var matriz = [];
+				var zonaActual = 1;
+				var temperatura = 1;
 
 				while (true) {
 					var entrada = prompt(
-						"Ingrese valores para una fila separados por comas o 'F' para finalizar:"
+						"Ingrese las temperaturas para una la ZONA " +
+							zonaActual +
+							" separadas por coma. Ingrese F para Finalizar"
 					);
 
 					// Si el usuario presiona F se acaba el programa
@@ -29,40 +32,30 @@
 					});
 					//Y vamos metiendo estos valores en la matriz
 					matriz.push(filaNumeros);
+					zonaActual++;
 				}
 
 				console.log(matriz);
 				return matriz;
 			}
 
-			// Función para separar números pares e impares
-			function separarParesImpares(matriz) {
-				var pares = [];
-				var impares = [];
+			function calcularMedia(matriz) {
+				var zonaActual = 1;
+
 				for (var i = 0; i < matriz.length; i++) {
+					var sumaNumeros = 0; 
 					for (var j = 0; j < matriz[i].length; j++) {
-						var num = matriz[i][j];
-						if (num % 2 === 0) {
-							pares.push(num);
-						} else {
-							impares.push(num);
-						}
+						sumaNumeros += matriz[i][j];
 					}
+
+					var media = sumaNumeros / matriz[i].length; 
+					alert("Media de la ZONA " + zonaActual + " = " + media);
+					zonaActual++; 
 				}
-				return [pares, impares];
 			}
 
-			// Llamada a las funciones
-			var matrizValores = obtenerValores();
-			var resultados = separarParesImpares(matrizValores);
-			
-			var arrayPares = resultados[0];
-        	var arrayImpares = resultados[1];
-
-			// Mostrar los resultados 
-			alert("Matriz de valores: " + matrizValores);
-			alert("Números pares: " + arrayPares);
-			alert("Números impares: " + arrayImpares);
+			var matrizResultados = obtenerValores();
+			calcularMedia(matrizResultados);
 		</script>
 	</body>
 </html>
