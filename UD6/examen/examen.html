@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Examen Tema 6</title>
+	</head>
+	<body>
+		<script>
+			function obtenerValores() {
+				var matriz = [];
+				var zonaActual = 1;
+
+				while (true) {
+					var entrada = prompt(
+						"Ingrese el consumo de las tomas para la DEPENDENCIA " +
+							zonaActual +
+							" separadas por coma. Ingrese F para Finalizar"
+					);
+
+					// Si el usuario presiona F se acaba el programa
+					if (entrada == "F" || entrada == "f") {
+						break;
+					}
+
+					//Separamos la entrada por comas, y  guardamos los números en la fila
+					var fila = entrada.split(",");
+					//Creamos un array en el que guardaremos los números en la variable fila
+					var filaNumeros = [];
+					//Variable booleana para controlar si un array tiene un número negativo
+					var filaContieneNegativos = false;
+
+					//Recorremos el array fila para ir añadiendo los números a filaNumeros más tarde
+					for (var i = 0; i < fila.length; i++) {
+						var numero = Number(fila[i]);
+
+						//En caso de que no se admitan números negativos o si el número es menor que cero
+						if (numero < 0) {
+							alert(
+								"No se permite introducir números negativos, introduce de nuevo el consumo para la DEPENDENCIA " +
+									zonaActual
+							);
+							filaContieneNegativos = true;
+							break;
+						}
+						//De lo contrario, se añade el número al array filaNumeros
+						else filaNumeros.push(numero);
+					}
+
+					//Si no contiene negativos, es decir, si filaContieneNegativos es falso, se añade a la matriz
+					//sin este bloque de código pasaría a la siguiente zona siempre
+					if (!filaContieneNegativos) {
+						matriz.push(filaNumeros);
+						zonaActual++;
+					}
+				}
+
+				console.log(matriz);
+				return matriz;
+			}
+
+			function consumoMaximoPorDependencia(matriz) {
+				var zonaActual = 1;
+
+				//Estructura básica para recorrer un array de dos dimensiones
+				for (var i = 0; i < matriz.length; i++) {
+					//Usamos la funcion Math.max para guardar el valor máximo de la matriz
+					//Con los puntos suspensivos hacemos que se recorran todos los valores de la matriz
+					var consumoMaximoZona = Math.max(...matriz[i]);
+					alert(
+						"El consumo máximo de la DEPENDENCIA " +
+							zonaActual +
+							" es " +
+							consumoMaximoZona
+					);
+					zonaActual++;
+				}
+			}
+
+			function superaConsumo2W(matriz) {
+				var zonaActual = 1;
+				//Estructura básica para recorrer un array de dos dimensiones
+				for (var i = 0; i < matriz.length; i++) {
+					//Usamos la funcion Math.max para guardar el valor máximo de la matriz
+					//Con los puntos suspensivos hacemos que se recorran todos los valores de la matriz
+					var consumoMaximoZona = Math.max(...matriz[i]);
+					//Si el valor de consumoMaximoZona supera 2, mostraremos esa dependencia en el mensaje de alert
+					if (consumoMaximoZona > 2) {
+						alert(
+							"La DEPENDENCIA " +
+								zonaActual +
+								" supera el consumo de 2kWh, porque su consumo máximo es " +
+								consumoMaximoZona
+						);
+					}
+					zonaActual++;
+				}
+			}
+
+			var matrizResultados = obtenerValores();
+			consumoMaximoPorDependencia(matrizResultados);
+			superaConsumo2W(matrizResultados);
+		</script>
+	</body>
+</html>
