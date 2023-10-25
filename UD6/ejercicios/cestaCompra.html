@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cesta de la Compra</title>
+	</head>
+	<body>
+		<script>
+			function menu() {
+				var articulosEnCesta = [];
+				while (true) {
+					opcion = Number(
+						prompt(
+							"1 : Ver cesta\n" +
+								"2 : Insertar un artículo\n" +
+								"3 : Borrar un artículo\n" +
+								"4 : Vaciar cesta\n" +
+								"5 : Salir"
+						)
+					);
+
+					switch (opcion) {
+						case 1:
+							mostrarCesta(articulosEnCesta);
+							break;
+						case 2:
+							insertarArticulo(articulosEnCesta);
+							break;
+						case 3:
+							alert("Borrar un artículo");
+							break;
+						case 4:
+							alert("Vaciar cesta");
+							break;
+						case 5:
+							return;
+						default:
+							alert("Opción no válida");
+					}
+				}
+			}
+
+			function mostrarCesta(articulosEnCesta) {
+				var alertText = "Código---Nombre---Precio---Cantidad\n"; // Cabecera
+
+				for (var i = 0; i < articulosEnCesta.length; i++) {
+					var item = articulosEnCesta[i];
+					alertText +=
+						item.codigo +
+						"---" +
+						item.nombre +
+						"---" +
+						item.precio +
+						"---" +
+						item.cantidad +
+						"\n";
+				}
+
+				alert(alertText);
+			}
+
+			function insertarArticulo(articulosEnCesta) {
+				codigo = Number(prompt("Introduce Código del Producto: "));
+				nombre = prompt("Introduce Nombre del Producto: ");
+				precio = Number(prompt("Introduce Precio del Producto: "));
+				cantidad = Number(prompt("Introduce Cantidad del Producto: "));
+				subtotal = precio * cantidad;
+
+				alert(
+					"Se ha añadido el siguiente producto:\n " +
+						" \nCódigo del Producto: " +
+						codigo +
+						" \nNombre del Producto: " +
+						nombre +
+						" \nPrecio del Producto: " +
+						precio +
+						" \nCantidad del Producto: " +
+						cantidad +
+						" \nSubtotal: " +
+						subtotal
+				);
+
+				var articuloAdded = {
+					codigo: codigo,
+					nombre: nombre,
+					precio: precio,
+					cantidad: cantidad,
+					subtotal: subtotal,
+				};
+
+				articulosEnCesta.push(articuloAdded);
+			}
+
+			menu();
+		</script>
+	</body>
+</html>
