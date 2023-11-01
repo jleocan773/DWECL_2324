@@ -1,98 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Cesta de la Compra</title>
-	</head>
-	<body>
-		<script>
-			function menu() {
-				var articulosEnCesta = [];
-				while (true) {
-					opcion = Number(
-						prompt(
-							"1 : Ver cesta\n" +
-								"2 : Insertar un artículo\n" +
-								"3 : Borrar un artículo\n" +
-								"4 : Vaciar cesta\n" +
-								"5 : Salir"
-						)
-					);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cesta de la Compra</title>
+  </head>
+  <body>
+    <script>
+      function menu() {
+        var articulosEnCesta = [];
+        var ultimoCodigo = 0;
+        while (true) {
+          opcion = Number(
+            prompt(
+              "1 : Ver cesta\n" +
+                "2 : Insertar un artículo\n" +
+                "3 : Borrar un artículo\n" +
+                "4 : Vaciar cesta\n" +
+                "5 : Salir"
+            )
+          );
 
-					switch (opcion) {
-						case 1:
-							mostrarCesta(articulosEnCesta);
-							break;
-						case 2:
-							insertarArticulo(articulosEnCesta);
-							break;
-						case 3:
-							alert("Borrar un artículo");
-							break;
-						case 4:
-							alert("Vaciar cesta");
-							break;
-						case 5:
-							return;
-						default:
-							alert("Opción no válida");
-					}
-				}
-			}
+          switch (opcion) {
+            case 1:
+              mostrarCesta(articulosEnCesta);
+              break;
+            case 2:
+              ultimoCodigo++;
+              insertarArticulo(articulosEnCesta, ultimoCodigo);
+              break;
+            case 3:
+              articulosEnCesta = eliminarArticulo(articulosEnCesta);
+              break;
+            case 4:
+              articulosEnCesta = vaciarCesta(articulosEnCesta);
+              break;
+            case 5:
+              return;
+            default:
+              alert("Opción no válida");
+          }
+        }
+      }
 
-			function mostrarCesta(articulosEnCesta) {
-				var alertText = "Código---Nombre---Precio---Cantidad\n"; // Cabecera
+      function mostrarCesta(articulosEnCesta) {
+        var alertText = "Código---Nombre---Precio---Cantidad\n";
+        var costeTotal = 0;
 
-				for (var i = 0; i < articulosEnCesta.length; i++) {
-					var item = articulosEnCesta[i];
-					alertText +=
-						item.codigo +
-						"---" +
-						item.nombre +
-						"---" +
-						item.precio +
-						"---" +
-						item.cantidad +
-						"\n";
-				}
+        for (var i = 0; i < articulosEnCesta.length; i++) {
+          var item = articulosEnCesta[i];
+          alertText +=
+            item.codigo +
+            "---" +
+            item.nombre +
+            "---" +
+            item.precio +
+            "---" +
+            item.cantidad +
+            "\n";
+        }
 
-				alert(alertText);
-			}
+        for (var i = 0; i < articulosEnCesta.length; i++) {
+          costeTotal += articulosEnCesta[i].subtotal;
+        }
 
-			function insertarArticulo(articulosEnCesta) {
-				codigo = Number(prompt("Introduce Código del Producto: "));
-				nombre = prompt("Introduce Nombre del Producto: ");
-				precio = Number(prompt("Introduce Precio del Producto: "));
-				cantidad = Number(prompt("Introduce Cantidad del Producto: "));
-				subtotal = precio * cantidad;
+        alert(
+          alertText + "\nEl coste total de los productos es: " + costeTotal
+        );
+      }
 
-				alert(
-					"Se ha añadido el siguiente producto:\n " +
-						" \nCódigo del Producto: " +
-						codigo +
-						" \nNombre del Producto: " +
-						nombre +
-						" \nPrecio del Producto: " +
-						precio +
-						" \nCantidad del Producto: " +
-						cantidad +
-						" \nSubtotal: " +
-						subtotal
-				);
+      function insertarArticulo(articulosEnCesta, ultimoCodigo) {
+        codigo = ultimoCodigo;
+        nombre = prompt("Introduce Nombre del Producto: ");
+        precio = Number(prompt("Introduce Precio del Producto: "));
+        cantidad = Number(prompt("Introduce Cantidad del Producto: "));
+        subtotal = precio * cantidad;
 
-				var articuloAdded = {
-					codigo: codigo,
-					nombre: nombre,
-					precio: precio,
-					cantidad: cantidad,
-					subtotal: subtotal,
-				};
+        alert(
+          "Se ha añadido el siguiente producto:\n " +
+            " \nCódigo del Producto: " +
+            codigo +
+            " \nNombre del Producto: " +
+            nombre +
+            " \nPrecio del Producto: " +
+            precio +
+            " \nCantidad del Producto: " +
+            cantidad +
+            " \nSubtotal: " +
+            subtotal
+        );
 
-				articulosEnCesta.push(articuloAdded);
-			}
+        var articuloAdded = {
+          codigo: codigo,
+          nombre: nombre,
+          precio: precio,
+          cantidad: cantidad,
+          subtotal: subtotal,
+        };
 
-			menu();
-		</script>
-	</body>
+        articulosEnCesta.push(articuloAdded);
+      }
+
+      function eliminarArticulo(articulosEnCesta) {
+        var codigoParaEliminar = Number(
+          prompt("Introduce el código del artículo que deseas eliminar")
+        );
+
+        var indiceAEliminar = articulosEnCesta.findIndex(
+          (articulo) => articulo.codigo === codigoParaEliminar
+        );
+
+        if (indiceAEliminar !== -1) {
+          articulosEnCesta.splice(indiceAEliminar, 1);
+          alert(
+            `Producto con código ${codigoParaEliminar} eliminado de la cesta.`
+          );
+        } else {
+          alert(
+            `No se encontró ningún producto con el código ${codigoParaEliminar}`
+          );
+        }
+
+        return articulosEnCesta;
+      }
+
+      function vaciarCesta(articulosEnCesta) {
+        articulosEnCesta = [];
+
+        return articulosEnCesta;
+      }
+
+      menu();
+    </script>
+  </body>
 </html>
