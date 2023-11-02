@@ -30,10 +30,10 @@
               insertarArticulo(articulosEnCesta, ultimoCodigo);
               break;
             case 3:
-              articulosEnCesta = eliminarArticulo(articulosEnCesta);
+              eliminarArticulo(articulosEnCesta);
               break;
             case 4:
-              articulosEnCesta = vaciarCesta(articulosEnCesta);
+              vaciarCesta(articulosEnCesta);
               break;
             case 5:
               return;
@@ -44,7 +44,7 @@
       }
 
       function mostrarCesta(articulosEnCesta) {
-        var alertText = "Código---Nombre---Precio---Cantidad\n";
+        var alertText = "Código---Nombre---Precio---Cantidad---Subtotal\n\n";
         var costeTotal = 0;
 
         for (var i = 0; i < articulosEnCesta.length; i++) {
@@ -57,6 +57,8 @@
             item.precio +
             "---" +
             item.cantidad +
+            "---" +
+            item.subtotal +
             "\n";
         }
 
@@ -120,14 +122,10 @@
             `No se encontró ningún producto con el código ${codigoParaEliminar}`
           );
         }
-
-        return articulosEnCesta;
       }
 
       function vaciarCesta(articulosEnCesta) {
-        articulosEnCesta = [];
-
-        return articulosEnCesta;
+        articulosEnCesta.length = 0;
       }
 
       menu();
