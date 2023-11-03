@@ -17,10 +17,6 @@
         this.#articulos.push(articulo);
       }
 
-      static obtenerArticulos() {
-        return this.#articulos;
-      }
-
       static mostrarCesta() {
         var alertText = "Código---Nombre---Precio---Cantidad---Subtotal\n\n";
         var costeTotal = 0;
@@ -50,59 +46,6 @@
           alertText + "\nEl coste total de los productos es: " + costeTotal
         );
       }
-
-      static eliminarArticulo() {
-        var codigoParaEliminar = Number(
-          prompt("Introduce el código del artículo que deseas eliminar")
-        );
-
-        var articulosEnCesta = Cesta.obtenerArticulos();
-        var indiceAEliminar = articulosEnCesta.findIndex(
-          (articulo) => articulo.detallesArticulo.codigo === codigoParaEliminar
-        );
-
-        if (indiceAEliminar !== -1) {
-          articulosEnCesta.splice(indiceAEliminar, 1);
-          alert(
-            `Producto con código ${codigoParaEliminar} eliminado de la cesta.`
-          );
-        } else {
-          alert(
-            `No se encontró ningún producto con el código ${codigoParaEliminar}`
-          );
-        }
-      }
-
-      static vaciarCesta() {
-        var articulosEnCesta = Cesta.obtenerArticulos();
-        articulosEnCesta.length = 0;
-      }
-
-      static insertarArticulo(ultimoCodigo) {
-        var codigo = ultimoCodigo;
-        var nombre = prompt("Introduce Nombre del Producto: ");
-        var precio = Number(prompt("Introduce Precio del Producto: "));
-        var cantidad = Number(prompt("Introduce Cantidad del Producto: "));
-        var subtotal = precio * cantidad;
-
-        alert(
-          "Se ha añadido el siguiente producto:\n " +
-          " \nCódigo del Producto: " +
-          codigo +
-          " \nNombre del Producto: " +
-          nombre +
-          " \nPrecio del Producto: " +
-          precio +
-          " \nCantidad del Producto: " +
-          cantidad +
-          " \nSubtotal: " +
-          subtotal
-        );
-
-        var nuevoArticulo = new Articulo(codigo, nombre, precio, cantidad, subtotal);
-        Cesta.agregarArticulo(nuevoArticulo);
-      }
-
 
 
     }
@@ -162,6 +105,7 @@
 
 
     function menu() {
+      var cestaArticulos = new Cesta;
       var ultimoCodigo = 0;
       while (true) {
         opcion = Number(
@@ -180,13 +124,13 @@
             break;
           case 2:
             ultimoCodigo++;
-            Cesta.insertarArticulo(ultimoCodigo);
+            insertarArticulo(cestaArticulos, ultimoCodigo);
             break;
           case 3:
-            Cesta.eliminarArticulo();
+            eliminarArticulo(cestaArticulos);
             break;
           case 4:
-            Cesta.vaciarCesta();
+            vaciarCesta(cestaArticulos);
             break;
           case 5:
             return;
@@ -196,11 +140,59 @@
       }
     }
 
+    function insertarArticulo(cesta, ultimoCodigo) {
+      var codigo = ultimoCodigo;
+      var nombre = prompt("Introduce Nombre del Producto: ");
+      var precio = Number(prompt("Introduce Precio del Producto: "));
+      var cantidad = Number(prompt("Introduce Cantidad del Producto: "));
+      var subtotal = precio * cantidad;
+
+      alert(
+        "Se ha añadido el siguiente producto:\n " +
+        " \nCódigo del Producto: " +
+        codigo +
+        " \nNombre del Producto: " +
+        nombre +
+        " \nPrecio del Producto: " +
+        precio +
+        " \nCantidad del Producto: " +
+        cantidad +
+        " \nSubtotal: " +
+        subtotal
+      );
+
+      var nuevoArticulo = new Articulo(codigo, nombre, precio, cantidad, subtotal);
+      Cesta.agregarArticulo(nuevoArticulo);
+    }
 
 
 
+    function eliminarArticulo(articulosEnCesta) {
+      var codigoParaEliminar = Number(
+        prompt("Introduce el código del artículo que deseas eliminar")
+      );
 
+      var articulosEnCesta = Cesta.obtenerArticulos();
+      var indiceAEliminar = articulosEnCesta.findIndex(
+        (articulo) => articulo.detallesArticulo.codigo === codigoParaEliminar
+      );
 
+      if (indiceAEliminar !== -1) {
+        articulosEnCesta.splice(indiceAEliminar, 1);
+        alert(
+          `Producto con código ${codigoParaEliminar} eliminado de la cesta.`
+        );
+      } else {
+        alert(
+          `No se encontró ningún producto con el código ${codigoParaEliminar}`
+        );
+      }
+    }
+
+    function vaciarCesta() {
+      var articulosEnCesta = Cesta.obtenerArticulos();
+      articulosEnCesta.length = 0;
+    }
 
 
     menu();
