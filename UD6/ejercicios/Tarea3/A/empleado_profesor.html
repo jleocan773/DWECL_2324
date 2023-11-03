@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Empleado</title>
+	</head>
+	<body>
+		<script>
+			class Empleado {
+				#edad;
+				constructor(nombre, apellidos, edad) {
+					this.nombre = nombre;
+					this.apellidos = apellidos;
+					this.#edad = edad;
+				}
+
+				// Setters
+				setEdad(nuevaEdad) {
+					this.#edad = nuevaEdad;
+				}
+
+				// Getters
+				getEdad() {
+					return this.#edad;
+				}
+
+
+				muestra() {
+					alert(
+						"Nombre: " +
+							this.nombre +
+							"\n" +
+							"Apellido: " +
+							this.apellidos +
+							"\n" +
+							"Edad: " +
+							this.getEdad()
+					);
+				}
+			}
+
+			var empleado1 = new Empleado("Trabajador", "McTrabajo", 50);
+			empleado1.muestra();
+
+			class Profesor extends Empleado {
+				constructor(nombre, apellidos, edad, cargo) {
+					super(nombre, apellidos, edad);
+					this.cargo = cargo;
+				}
+
+				muestraCargo() {
+					alert(
+						"Nombre: " +
+							this.nombre +
+							"\n" +
+							"Apellido: " +
+							this.apellidos +
+							"\n" +
+							"Edad: " +
+							this.getEdad() +
+							"\n" +
+							"Cargo: " +
+							this.cargo
+					);
+				}
+			}
+
+			var profesor1 = new Profesor("Profesor", "McEnseña", 30, "Jefe Departamento");
+			profesor1.muestraCargo();
+
+
+		</script>
+	</body>
+</html>
