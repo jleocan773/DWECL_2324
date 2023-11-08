@@ -108,7 +108,6 @@
     }
 
 
-
     class Articulo {
       #codigo;
       #nombre;
@@ -161,43 +160,52 @@
     }
 
 
-    function menu() {
-      var ultimoCodigo = 0;
-      while (true) {
-        opcion = Number(
-          prompt(
-            "1 : Ver cesta\n" +
-            "2 : Insertar un artículo\n" +
-            "3 : Borrar un artículo\n" +
-            "4 : Vaciar cesta\n" +
-            "5 : Salir"
-          )
-        );
+    class Menu {
+      constructor() {
+        this.ultimoCodigo = 0;
+      }
 
-        switch (opcion) {
-          case 1:
-            Cesta.mostrarCesta();
-            break;
-          case 2:
-            ultimoCodigo++;
-            Cesta.insertarArticulo(ultimoCodigo);
-            break;
-          case 3:
-            Cesta.eliminarArticulo();
-            break;
-          case 4:
-            Cesta.vaciarCesta();
-            break;
-          case 5:
-            return;
-          default:
-            alert("Opción no válida");
+      static menuPrincipal() {
+        const menu = new Menu();
+
+        while (true) {
+          let opcion = Number(
+            prompt(
+              "1 : Ver cesta\n" +
+              "2 : Insertar un artículo\n" +
+              "3 : Borrar un artículo\n" +
+              "4 : Vaciar cesta\n" +
+              "5 : Salir"
+            )
+          );
+
+          switch (opcion) {
+            case 1:
+              Cesta.mostrarCesta();
+              break;
+            case 2:
+              menu.ultimoCodigo++;
+              Cesta.insertarArticulo(menu.ultimoCodigo);
+              break;
+            case 3:
+              Cesta.eliminarArticulo();
+              break;
+            case 4:
+              Cesta.vaciarCesta();
+              break;
+            case 5:
+              return;
+            default:
+              alert("Opción no válida");
+          }
         }
       }
     }
 
 
-    menu();
+    var nuevaCesta = new Cesta();
+    Menu.menuPrincipal();
+
   </script>
 </body>
 
