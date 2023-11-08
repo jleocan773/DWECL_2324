@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta charset="UTF-8" >
+    <script>  
+        function valida ( ) {    
+            var inp=document.getElementById ("inp");
+            var mensa=document.getElementById ("mensa");
+            if(!inp.checkValidity()) {
+                mensa.innerHTML="Dato inválido";
+            }else{
+                mensa.innerHTML="";
+            }
+        }
+        function fEvento( ) {
+            var formu=document.getElementById("bot"); 
+            formu.addEventListener('click',valida);  //Añade control evento 'clic'  
+        }    
+       window.onload=fEvento; // Necesario esperar que se carguen los elementos HTML
+    </script>
+</head>
+<body>    
+    <label>Inserta un número de 1 a 10:</label> <input id="inp" type="number" max=10 min=1 required />
+    <button id="bot" >Validar</button> 
+    <p id="mensa"></p>     
+</body>
+</html>
