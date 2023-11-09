@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baja Vehículo</title>
+
+    <!-- Bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons 1.11.1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <!-- Estilo -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Javascript-->
+    <script src="codigo.js"></script>
+
+</head>
+
+<body>
+    <!-- Capa Principal -->
+    <div class="container">
+
+        <header class="pb-3 mb-4 border-bottom">
+            <i class="bi bi-car-front-fill" style="font-size: 2rem; color: rgb(0, 255, 128)" ;></i>
+            <span class="fs-3">Solicitud de baja de vehículo</span>
+        </header>
+
+
+        <div class="container">
+            <div class=" text-center mt-6 ">
+            </div>
+            <div class="container">
+                <form id="formulario-baja" role="form">
+                    <div class="controls">
+                        <h5>Datos del Vehículo</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_matricula">Matrícula</label>
+                                    <input id="form_matricula" type="text" name="matricula" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_fechamatricula">Fecha de Matriculación</label>
+                                    <input id="form_fechamatricula" type="date" name="fechamatriculacion"
+                                        class="form-control" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="form_nbastidor">6 últimos dígitos (nº bastidor)</label>
+                                    <input id="form_nbastidor" type="text" name="nbastidor" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-5">
+                            <h5>Datos del Títular</h5>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_nombre">Nombre</label>
+                                    <input id="form_nombre" type="text" name="nombre" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_apellidos">Apellidos</label>
+                                    <input id="form_apellidos" type="text" name="apellidos" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="form_domicilio">Domicilio</label>
+                                    <input id="form_domicilio" type="text" name="domicilio" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-5">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_dni">DNI</label>
+                                    <input id="form_dni" type="text" name="dni" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_email">Email</label>
+                                    <input id="form_email" type="email" name="email" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_telefono">Teléfono</label>
+                                    <input id="form_telefono" type="number" name="telefono" class="form-control"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Tipo de Baja</p>
+                                <div class="col-md-12" id="tipoBaja">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="eleccionDefinitiva"
+                                            id="temporal" value="Temporal" required>
+                                        <label class="form-check-label" for="temporal">
+                                            Temporal
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="eleccionDefinitiva"
+                                            id="definitiva" value="Definitiva">
+                                        <label class="form-check-label" for="definitiva">
+                                            Definitiva
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-success btn-send  pt-2 btn-block" value="Send Message">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Pie del documento -->
+    <footer class="footer mt-auto py-3 fixed-bottom bg-light">
+        <div class="container">
+            <span class="text-muted">© 2022
+                Jonathan León Canto - DWECL - 2º DAW - Curso 23/24</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>
