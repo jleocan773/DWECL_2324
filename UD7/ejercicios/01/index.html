@@ -17,9 +17,6 @@
     <!-- Estilo -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Javascript-->
-    <script src="codigo.js"></script>
-
 </head>
 
 <body>
@@ -44,8 +41,9 @@
                                 <div class="form-group">
                                     <label for="form_matricula">Matrícula</label>
                                     <input id="form_matricula" type="text" name="matricula" class="form-control"
-                                        required="required">
+                                        pattern="[0-9]{4}[a-zA-Z]{3}" required>
                                 </div>
+
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -57,8 +55,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="form_nbastidor">6 últimos dígitos (nº bastidor)</label>
-                                    <input id="form_nbastidor" type="text" name="nbastidor" class="form-control"
-                                        required="required">
+                                    <input id="form_nbastidor" type="text" name="nbastidor" class="form-control" pattern="[0-9]{6}"
+                                        required>
                                 </div>
                             </div>
                         </div>
@@ -69,21 +67,21 @@
                                 <div class="form-group">
                                     <label for="form_nombre">Nombre</label>
                                     <input id="form_nombre" type="text" name="nombre" class="form-control"
-                                        required="required">
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_apellidos">Apellidos</label>
                                     <input id="form_apellidos" type="text" name="apellidos" class="form-control"
-                                        required="required">
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="form_domicilio">Domicilio</label>
                                     <input id="form_domicilio" type="text" name="domicilio" class="form-control"
-                                        required="required">
+                                        required>
                                 </div>
                             </div>
                         </div>
@@ -91,23 +89,22 @@
                         <div class="row my-5">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="form_dni">DNI</label>
-                                    <input id="form_dni" type="text" name="dni" class="form-control"
-                                        required="required">
+                                    <label for="form_dni" id="label_dni">DNI</label>
+                                    <input id="form_dni" type="text" name="dni" class="form-control" pattern="[0-9]{8}[a-zA-Z]{1}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_email">Email</label>
                                     <input id="form_email" type="email" name="email" class="form-control"
-                                        required="required">
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_telefono">Teléfono</label>
-                                    <input id="form_telefono" type="number" name="telefono" class="form-control"
-                                        required="required">
+                                    <input id="form_telefono" type="text" name="telefono" class="form-control" pattern="[0-9]{9}"
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -131,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <input type="submit" class="btn btn-success btn-send  pt-2 btn-block" value="Send Message">
+                                <input type="submit" class="btn btn-info btn-send  pt-2 btn-block" value="Enviar">
                             </div>
                         </div>
 
@@ -143,7 +140,6 @@
 
     </div>
 
-
     <!-- Pie del documento -->
     <footer class="footer mt-auto py-3 fixed-bottom bg-light">
         <div class="container">
@@ -151,6 +147,9 @@
                 Jonathan León Canto - DWECL - 2º DAW - Curso 23/24</span>
         </div>
     </footer>
+
+    <!-- Javascript-->
+    <script src="codigo.js"></script>
 
 </body>
 

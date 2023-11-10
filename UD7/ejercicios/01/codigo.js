@@ -1,14 +1,47 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const matriculaInput = document.getElementById('form_matricula');
+class Vehiculo {
+	constructor() {
+		this.validaMatricula();
+		this.cambiarTituloDNI();
+	}
 
-    matriculaInput.addEventListener('input', function(event) {
-        const matriculaValue = matriculaInput.value;
-        const matriculaPattern = /^[0-9]{4}[a-zA-Z]{3}$/;
+	validaMatricula() {
+		var matriculaInput = document.getElementById("form_matricula");
 
-        if (!matriculaPattern.test(matriculaValue)) {
-            matriculaInput.style.borderColor = 'red';
-        } else {
-            matriculaInput.style.borderColor = ''; // Restablece el borde si cumple con el patrón
-        }
-    });
+		matriculaInput.addEventListener("input", function () {
+			if (matriculaInput.validity.patternMismatch) {
+				matriculaInput.setCustomValidity(
+					"Ingrese una matrícula válida (4 números y 3 letras)"
+				);
+			} else {
+				matriculaInput.setCustomValidity("");
+			}
+		});
+	}
+
+	cambiarTituloDNI() {
+		var tituloDNI = document.getElementById("label_dni");
+		var formDNI = document.getElementById("form_dni");
+
+		formDNI.addEventListener("focus", function () {
+			tituloDNI.textContent = "Editando DNI";
+		});
+
+		formDNI.addEventListener("blur", function () {
+			tituloDNI.textContent = "DNI";
+		});
+	}
+}
+
+var vehiculo = new Vehiculo();
+
+document
+	.getElementById("form_matricula")
+	.addEventListener("input", vehiculo.validaMatricula);
+
+document.getElementById("form_dni").addEventListener("focus", function () {
+	vehiculo.cambiarTituloDNI(true);
+});
+
+document.getElementById("form_dni").addEventListener("blur", function () {
+	vehiculo.cambiarTituloDNI(false);
 });
