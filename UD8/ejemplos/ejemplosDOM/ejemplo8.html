@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        function f1() {
+            var h = document.createElement("H1"); // Crea elemento H1
+            var t = document.createTextNode("Hola"); 
+            h.appendChild(t);
+            // h.innerHTML="Hola"       También es posible ....
+            document.body.appendChild(h);
+
+            var clase = document.createElement('style')  // Crea estilo y añade nueva clase.
+            clase.innerHTML = ".clase1 {border: 2px solid blue; background-color:cyan; width:300px;}";
+            document.head.appendChild(clase); // Lo añade al HEAD
+
+            var at = h.setAttribute("class","clase1"); // Aplica clase a 'H1' creando el atributo...
+            at= h.setAttribute("id","idH1") // Crea atributo 'id'
+            h.style.color ="red";  // Aplica estilo directo a elemento H1.
+
+        }
+
+        function f2(){ 
+            var h= document.getElementById("idH1");
+            h.removeAttribute("class"); //Borra sólo atributo 'class' de H1
+            h.style.color =""; //Borra color
+            
+        }
+        function f3(){ // Borra de dos formas el elemento H1
+            var h= document.getElementById("idH1");
+            h.remove();   // Borra el propio elemento H1.
+            //  var b = document.body;  // Otra forma de borrar elemento
+            //  b.removeChild(h);       ..............................
+        }
+
+    </script>
+</head>
+<body>   
+    <button id="bot1" onclick="f1()" >Crea elemento</button>  
+    <button id="bot2" onclick="f2()" >Borra clase</button>
+    <button id="bot3" onclick="f3()" >Borra elemento</button>   
+</body>
+</html>

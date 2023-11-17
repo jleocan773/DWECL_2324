@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    .class1 {
+        color: green;
+    }
+</style>
+<script>
+
+    function f1 () {
+    var h1 = document.getElementsByTagName("h1")[0]; // Obtiene referencia al objeto.
+    var att = document.createAttribute("class"); // Crea atributo tipo 'class' y lo referencia.
+    att.value = "class1"; // Establece la clase predefinida.
+    h1.setAttributeNode(att); // Aplica atributo.
+    }
+</script> 
+</head>
+<body >
+    <h1 id="H1A">Primer título</h1>
+    <h1 id="H1B">Segundo título</h1>
+    <button onclick="f1()">Pulsar</button>
+</body>
+</html>

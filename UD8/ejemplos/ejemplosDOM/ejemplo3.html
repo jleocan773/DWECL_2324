@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+            function f1() {
+                var x = document.getElementById("bot")
+                var y=x.attributes.length; // Guarda nº de atributos del elemento referenciado.
+                document.getElementById("p1").innerHTML = y; // Muestra nº atributos.
+                var y=x.attributes[1].name;
+                document.getElementById("p1").innerHTML += "<br>"+ y; // Añade nombre del atributo.
+                var y=x.attributes[1].value;
+                document.getElementById("p1").innerHTML += "<br>"+ y; // Añade valor del atributo.
+            }
+    </script>
+ 
+</head>
+<body>   
+    <button id="bot" onclick="f1()" >Pulsar</button>
+    <p id="p1"></p>
+</body>
+</html>

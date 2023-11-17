@@ -17,6 +17,9 @@
     <!-- Estilo -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Javascript-->
+    <script src="codigo.js" defer></script>
+
 </head>
 
 <body>
@@ -33,7 +36,7 @@
             <div class=" text-center mt-6 ">
             </div>
             <div class="container">
-                <form id="formulario-baja" role="form">
+                <form id="formulario-baja" role="form" method="get">
                     <div class="controls">
                         <h5>Datos del Vehículo</h5>
                         <div class="row">
@@ -55,8 +58,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="form_nbastidor">6 últimos dígitos (nº bastidor)</label>
-                                    <input id="form_nbastidor" type="text" name="nbastidor" class="form-control" pattern="[0-9]{6}"
-                                        required>
+                                    <input id="form_nbastidor" type="text" name="nbastidor" class="form-control"
+                                        pattern="[0-9]{6}" required>
                                 </div>
                             </div>
                         </div>
@@ -66,8 +69,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_nombre">Nombre</label>
-                                    <input id="form_nombre" type="text" name="nombre" class="form-control"
-                                        required>
+                                    <input id="form_nombre" type="text" name="nombre" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -90,21 +92,21 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_dni" id="label_dni">DNI</label>
-                                    <input id="form_dni" type="text" name="dni" class="form-control" pattern="[0-9]{8}[a-zA-Z]{1}" required>
+                                    <input id="form_dni" type="text" name="dni" class="form-control"
+                                        pattern="[0-9]{8}[a-zA-Z]{1}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_email">Email</label>
-                                    <input id="form_email" type="email" name="email" class="form-control"
-                                        required>
+                                    <input id="form_email" type="email" name="email" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_telefono">Teléfono</label>
-                                    <input id="form_telefono" type="text" name="telefono" class="form-control" pattern="[0-9]{9}"
-                                        required>
+                                    <input id="form_telefono" type="text" name="telefono" class="form-control"
+                                        pattern="[0-9]{9}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -147,9 +149,6 @@
                 Jonathan León Canto - DWECL - 2º DAW - Curso 23/24</span>
         </div>
     </footer>
-
-    <!-- Javascript-->
-    <script src="codigo.js"></script>
 
 </body>
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigator</title>
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        alert( "El navegador no soporta geolocalización.");
+      }
+    }
+    function showPosition(position) {
+     alert ("Latitud: " + position.coords.latitude + 
+      "\nLongitud: " + position.coords.longitude);
+    }
+    </script>
+</head>
+<body>
+<p>Clic para ver tus coordenadas.</p>
+<button onclick="getLocation()">Prueba</button>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        function f1() {
+            var x=document.querySelectorAll(".class1"); // Seleccionamos los elementos con clase 'class1'
+            for (var i=0;i<x.length;i++){ // Recorre colección de nodos devueltos y modifica su estilo.
+                x[i].style.color="#FF0000"; 
+            }
+
+            x = document.querySelectorAll("button"); // Busca todos los elementos tipo botón.
+            x[0].style.borderColor="blue";              // y cambia su color de borde.
+
+            x = document.getElementById("div1").querySelectorAll("h1,h2"); //Busca todos los H1 y H2 dentro del DIV.
+            for (var i=0;i<x.length;i++){                                   // y cambia su color de texto.
+                x[i].style.color="green";
+            }
+
+        }
+    </script>
+</head>
+<body>   
+    <button id="bot1" onclick="f1()" >Pulsar</button>
+    <p id="p1" class="class1">Texto 1...</p>
+    <p id="p2" class="class1">Texto 2 ...</p>
+
+    <div id="div1">
+        <h1>Título 1</h1>
+        <h2 >Texto 3...</h2>
+    </div>
+    
+</body>
+</html>

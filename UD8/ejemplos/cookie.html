@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var d = new Date();
+        d.setTime(d.getTime() + (1*24*60*60*1000)); // Hora actual + 1 día de duración.
+        var expira = "expires="+ d.toUTCString();
+        document.cookie="nombre=Juan"+ ";" +expira + ";path=/"; // Crea cookie.
+        alert(document.cookie); // Muestra cookie.
+        document.cookie="nombre=Juan"+ ";" +"max-age=0;"+";path=/"; // Borra cookie.
+        alert(document.cookie); // Muestra cookie borrada.
+    </script>
+</body>
+</html>

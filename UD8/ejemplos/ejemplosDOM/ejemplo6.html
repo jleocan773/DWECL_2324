@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function f1() {
+            var x= document.getElementById("p1");
+            var bot=document.getElementById("bot1").id; // Selecciona mediante 'id' a bot1 y devuelve su id.
+            x.innerHTML=bot;
+            bot=document.getElementsByClassName("class2")[0].id // Selecciona mediante clase y devuelve su id.
+            x.innerHTML += "<br>"+bot;
+            bot=document.getElementsByTagName("BUTTON")[0].id; // Selecciona mediante tipo de elemento.
+            x.innerHTML += "<br>"+bot; 
+            bot=document.getElementsByName("botones")[0].id; //Selecciona mediante nombre del elemento.
+            x.innerHTML += "<br>"+bot;
+        }
+    </script>
+</head>
+<body>   
+    <button id="bot1" class="class1" name="botones" onclick="f1()" >Pulsar</button>
+    <button id="bot2" class="class2" name="botones">Pulsar</button>
+    <p id="p1"></p>
+</body>
+</html>
