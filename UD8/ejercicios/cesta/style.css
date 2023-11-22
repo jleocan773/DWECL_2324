@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    background-color: grey;
+}
+
+.header {
+    background-color: rgb(199, 191, 191);
+    height: 150px;
+    grid-column: 2 / 12;
+}
+
+.header__zonaLogo {
+    background-color: yellowgreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6em;
+}
+

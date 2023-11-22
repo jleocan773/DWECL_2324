@@ -1,26 +1,27 @@
 class Login {
+    #usuarios = [
+        { user: "Usuario1", pass: "Abcdefg1" },
+        { user: "Usuario2", pass: "1234567A" },
+        { user: "Usuario3", pass: "1A2q3g4p" },
+    ];
 
+    validacion(user, pass) {
+        var usuarioLogin = this.#usuarios.find(
+            (usuario) => usuario.user == user && usuario.pass == pass
+        );
 
-    #usuarios = {
-        'user': {'login':'adri1', 'password':'chocoflake'},
-        'user': {'login':'jorge2', 'password':'piccolo'},
-        'user': {'login':'jonathan3', 'password':'leon'},
+        if (usuarioLogin) {
+            alert("Se ha iniciado la sesión");
+        } else {
+            alert("El usuario y/o contraseña es incorrecto");
+        }
     }
+}
 
+function fEvento() {
+    var usuario = document.getElementById("login").value;
+    var contrasena = document.getElementById("password").value;
 
-
-    validarFormatoPassword(){
-        var passwordLogin = document.getElementById("password");
-        var patron = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$/;
-
-        
-
-    }
-
-
-
-
-
-
-
+    var logeo = new Login();
+    logeo.validacion(usuario, contrasena);
 }

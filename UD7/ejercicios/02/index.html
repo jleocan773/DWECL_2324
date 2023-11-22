@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Login</title>
 
-    <!-- Javascript-->
+    <!-- Javascript -->
     <script src="codigo.js" defer></script>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -25,9 +31,9 @@
             <!-- Login Form -->
             <form>
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" required>
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" required>
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="password" id="password" class="form-control password-field fadeIn third" name="password" placeholder="password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$" required>
             </form>
+            <button type="button" class="btn btn-info" onclick="fEvento()">Iniciar Sesión</button>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
