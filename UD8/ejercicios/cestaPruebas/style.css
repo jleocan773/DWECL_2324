@@ -1,0 +1,114 @@
+body {
+	margin: 0;
+	background-color: whitesmoke;
+}
+
+.header {
+	height: 150px;
+	background-color: rgb(196, 187, 187);
+	display: flex;
+	justify-content: space-around;
+}
+
+.header__zonaTitulo {
+	height: 100%;
+	width: 20%;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	transition: 0.2s linear;
+}
+
+#zonaTitulo__logo img {
+	width: auto;
+	height: auto;
+}
+
+#tituloPagina {
+	width: 400px;
+	font-size: 4em;
+	color: white;
+}
+
+.header_zonaNavegacion {
+	height: 100%;
+	width: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.header_zonaNavegacion a {
+	text-decoration: none;
+	color: white;
+	font-size: 2em;
+}
+
+.header_zonaNavegacion__div {
+	padding: 5px;
+}
+
+/* ZONA MAIN */
+
+.zonaMain {
+	margin-top: 10px;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-auto-rows: minmax(100px, auto);
+	row-gap: 10px;
+}
+
+.zonaProductos {
+	grid-column: 1/7;
+	display: grid;
+	gap: 20px;
+}
+
+.filaProductos {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 20px;
+}
+
+.producto {
+	border: 2px solid black;
+	padding: 10px;
+	text-align: center;
+}
+
+.producto img {
+	height: auto;
+	width: 100%;
+}
+
+.producto button {
+	text-align: center;
+	color: white;
+	background-color: lightskyblue;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.producto button:hover {
+	background-color: #0056b3;
+}
+
+.zonaCesta {
+	grid-column: 8/13;
+}
+
+.zonaProductos table,
+.zonaCesta table,
+th {
+	border: 2px solid black;
+	text-align: center;
+}
+
+.zonaCesta__total,
+.zonaCesta__IVA {
+	text-align: right;
+}

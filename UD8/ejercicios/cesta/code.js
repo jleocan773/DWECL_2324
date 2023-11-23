@@ -2,7 +2,6 @@ class Producto {
     
 }
 
-
 var productos = [
     [1, "Bolso", 20, "https://source.unsplash.com/random/500x500?purse"],
     [2, "Móvil", 120, "https://source.unsplash.com/random/500x500?smartphone"],

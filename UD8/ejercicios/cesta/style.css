@@ -3,19 +3,32 @@ body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     background-color: grey;
+    grid-column: 1 / 13;
 }
 
 .header {
-    background-color: rgb(199, 191, 191);
     height: 150px;
     grid-column: 2 / 12;
 }
 
 .header__zonaLogo {
-    background-color: yellowgreen;
+    background-color: rgb(199, 191, 191);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 6em;
+}
+
+.main{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.main__muestraproductos {
+    grid-column: span 12; /* Ocupa las 12 columnas disponibles */
+}
+
+.main__cestaproductos {
+    grid-column: span 12; /* Ocupa las 12 columnas disponibles */
 }
 
