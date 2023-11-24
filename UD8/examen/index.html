@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css">
+        input:invalid {
+            border: 1px solid red;
+        }
+
+        input:valid {
+            border: 1px solid green;
+        }
+    </style>
+    <script>
+        //Con esta línea nos aseguramos de que el código no se ejecute hasta que haya cargado toda la página.
+        document.addEventListener('DOMContentLoaded', function () {
+            // Clase Artículo
+            class Articulo {
+                //Creamos un contador para autoincrementar el campo ID con cada instancia creada
+                static autoincrementoID = 1;
+                id;
+                cod;
+                color;
+                piel;
+
+                constructor(cod, color, piel) {
+                    //Igualamos la ID del artículo al contador, como fue declarado static irá aumentando automáticamente para cada instancia creada
+                    this.id = Articulo.autoincrementoID++;
+                    this.cod = cod;
+                    this.color = color;
+                    this.piel = piel;
+                }
+            }
+
+            // Clase Cartera, que hereda de la clase Artícuclo
+            class Cartera extends Articulo {
+                //Esta clase tendrá un nuevo atributo
+                bolsillo;
+
+                //Para el método constructor, heredará el del padre ya que usará los mismos atributos pero añadiendole su atributo propio
+                constructor(cod, color, piel, bolsillo) {
+                    super(cod, color, piel);
+                    this.bolsillo = bolsillo;
+                }
+            }
+
+            // Clase Base
+            class Base {
+                //Creamos como atributo un array que contendrá las diferentes instancias que vayamos creando
+                #articulos = [];
+
+                //Llamamos al método para controlar los eventos
+                constructor() {
+                    this.#fEvento();
+                }
+
+                // Método para establecer el controlador de eventos
+                #fEvento() {
+                    var formulario = document.getElementById('f1');
+                    formulario.addEventListener('submit', (event) => {
+                        event.preventDefault();
+                        this.#alta();
+                    });
+                }
+
+
+                // Método para dar de alta un nuevo artículo
+                #alta() {
+                    var nuevoCod = document.getElementById('cod').value;
+                    var nuevoColor = document.getElementById('color').value;
+                    var nuevoPiel = document.getElementById('piel').value;
+                    var nuevoBolsillo = document.getElementById('bolsillo').value;
+
+                    var nuevaCartera = new Cartera(nuevoCod, nuevoColor, nuevoPiel, nuevoBolsillo);
+                    this.#articulos.push(nuevaCartera);
+
+                    // Mostrar el array en una tabla
+                    var tablaCarteras = document.getElementById('carteras');
+                    //"Limpiamos" el contenido actual de la tabla para que no se vuelvan a añadir antiguos artículos
+                    tablaCarteras.innerHTML = '';
+
+                    //Mostramos la Tabla, con un bucle forEach que itere sobre los atributoso de la instancia
+                    this.#articulos.forEach((articulo) => {
+                        //Creamos la variable fila que será una nueva fila en la tabla
+                        var fila = document.createElement('tr');
+                        fila.innerHTML = 
+                             `<td>${articulo.id}</td>
+                              <td>${articulo.cod}</td>
+                              <td>${articulo.color}</td>
+                              <td>${articulo.piel}</td>
+                              <td>${articulo.bolsillo}</td>`;
+                        //Añadimos esa fila al elemento tablaCarteras
+                        tablaCarteras.appendChild(fila);
+                    });
+                }
+            }
+
+            // Instanciamos un objeto de la clase Base
+            const base = new Base();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Alta de artículos: Carteras </h2>
+            <br><br><br>
+        </div>
+        <form id="f1">
+            <div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Cod:
+                            <input type="text" class="form-control" id="cod" placeholder="5 dígitos + A"
+                                pattern="^[0-9]{5}[A]$" name="cod" required>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Color:
+                            <input type="text" class="form-control" id="color" name="color" required>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Piel:
+                            <input type="text" class="form-control" id="piel" name="piel" required>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Bolsillo:
+                            <input type="text" class="form-control" id="bolsillo" name="bolsillo" placeholder="SI/NO"
+                                required>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <button id="bot" type="submit" class="btn btn-primary">
+                Dar de alta
+            </button>
+        </form>
+        <br><br><br>
+        <div class="row">
+            <h3>Stock carteras </h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cod.</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Piel</th>
+                        <th scope="col">Bolsillo</th>
+                    </tr>
+                </thead>
+                <!-- Cuerpo donde añadir registros de carteras -->
+                <tbody id="carteras">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

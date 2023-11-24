@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta charset="UTF-8" >
+    <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    >
+    <style type="text/css">
+        input:invalid {border: 1px solid red; }
+        input:valid {border: 1px solid green;}   
+    </style>
+<script>
+
+// Código aquí ........
+
+</script>
+</head>
+<body>    
+    <div class="container">
+        <div class="row" >       
+            <h2>Alta de artículos: Carteras </h2>
+            <br><br><br>
+        </div>  
+        <form id="f1">       
+            <div  >
+                <div class="col-md-3">
+                    <div class="form-group">
+                            <label >Cod:
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="cod"  
+                                placeholder="5 dígitos + A"  
+                                pattern="^[0-9]{5}[A]$" 
+                                name="cod" 
+                                required>
+                            </label> 
+
+                    </div> 
+                </div>      
+            </div>
+
+            <div >   
+                <div class="col-md-3">
+                        <div class="form-group">
+                                <label>Color:
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="color"  
+                                        name="color"   
+                                        required>
+                                </label>
+                        </div> 
+                </div> 
+            </div>
+            <div >   
+                <div class="col-md-3">
+                        <div class="form-group">
+                                <label>Piel:
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="piel"  
+                                        name="piel"   
+                                        required>
+                                </label>
+                        </div> 
+                </div> 
+            </div>
+            <div >   
+                <div class="col-md-3">
+                        <div class="form-group">
+                                <label>Bolsillo:
+                                    <input 
+                                        type="text" 
+                                        class="form-control"  
+                                        id="bolsillo"  
+                                        name="bolsillo" 
+                                        placeholder="SI/NO"   
+                                        required>
+                                </label>
+                        </div> 
+                </div> 
+            </div>
+            
+            <br>
+            <button 
+                id="bot" 
+                type="submit" 
+                class="btn btn-primary">
+                Dar de alta
+            </button>     
+        </form>
+        <br><br><br>
+        <div class="row" >         
+            <h3>Stock carteras </h2>
+                <table  class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cod.</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Piel</th>
+                        <th scope="col">Bolsillo</th>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo donde añadir registros de carteras -->
+                    <tbody id="carteras"></tbody>
+                </table>
+        </div>
+    
+    </div>  
+  
+</body>
+</html>
