@@ -43,7 +43,7 @@ class Cesta {
 
 			const inputCantidad = document.createElement("input");
 			inputCantidad.type = "number";
-			inputCantidad.value = producto.cantidad;
+			inputCantidad.value = 1;
 
 			const botonAñadir = document.createElement("button");
 			botonAñadir.textContent = "Añadir";
@@ -66,7 +66,7 @@ class Cesta {
 	mostrarCesta(producto) {
 		const cestaTable = document.getElementById("cuerpoCesta");
 
-		// Crea la fila solo para el producto específico
+		// Crea la fila solo para el producto seleccionado
 		const fila = document.createElement("tr");
 
 		const codigo = document.createElement("td");
@@ -90,7 +90,7 @@ class Cesta {
 		fila.appendChild(precio);
 		fila.appendChild(subtotal);
 
-		// Agrega la nueva fila al final de la tabla
+		// Agregamos la nueva fila al final de la tabla
 		cestaTable.appendChild(fila);
 
 		// Actualiza los totales
@@ -116,7 +116,7 @@ class Cesta {
 
 	calcularTotalConIVA() {
 		const total = this.calcularTotal();
-		const iva = 0.21; // Cambia esto si el porcentaje de IVA es diferente
+		const iva = 0.21; 
 		return total + total * iva;
 	}
 }
