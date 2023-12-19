@@ -219,13 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
       0,
       "https://source.unsplash.com/random/250x250?cookies"
     ),
-    (new Producto(
+    (producto9 = new Producto(
       9,
       "Palmera",
       150,
       0,
       "https://source.unsplash.com/random/250x250?palmtree"
     )),
+    // Agrega aquí el resto de tus productos
   ];
 
   const contProductos = new ContProductos(productos);
