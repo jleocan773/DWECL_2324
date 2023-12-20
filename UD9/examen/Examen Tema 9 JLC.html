@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .centra {
+            border: 1px solid grey;
+            text-align: center;
+        }
+
+        .borde {
+            border: 1px solid grey;
+        }
+
+        td:hover {
+            background-color: aquamarine;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+
+        class Secc {
+            //Creamos una variable id en estática que se irá autoincrementando con cada instancia creada
+            static id = 1;
+
+            //Constructor
+            constructor(tipo, nombre, costes) {
+                this.tipo = tipo;
+                this.nombre = nombre;
+                this.costes = costes;
+
+                //Le ponemos el ID solamente a los productos
+                if (tipo == 'modelo') {
+                    this.id = Secc.id++;
+                }
+            }
+
+            //Para la cabecera
+            crearFilaCabecera() {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `<th class="centra">ID</th><th class="centra">Nombre</th><th class="centra">CostoParte</th>`;
+                return fila;
+            }
+
+            //Para la fila que contendrá el nombre del producto
+            crearFilaModelo() {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `<td class="centra">${this.id}</td><td class="centra"><b>${this.nombre}</b></td><td class="centra"></td>`;
+                return fila;
+            }
+
+            //Para la fila que contendrá el coste de la parte actual
+            crearFilaCoste() {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `<td class="centra"></td><td class="borde">${this.nombre}</td><td class="centra">${this.costes}</td>`;
+                return fila;
+            }
+
+            //Para la fila al final de cada producto que contendrá el total del coste de las partes
+            crearFilaTotal() {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `<td class="centra"></td><td class="centra">Total</td class="centra"><td class="centra">${this.costes.toFixed(2)}  €</td>`;
+                return fila;
+            }
+        }
+
+
+
+        class Tabla {
+            constructor(datos) {
+                this.datos = JSON.parse(datos);
+            }
+
+            // Método para renderizar la tabla
+            renderizarTabla() {
+                const tabla = document.createElement('table');
+                document.body.appendChild(tabla);
+
+                // Crear cabecera
+                const cabecera = new Secc('cabecera', 'Nombre', null);
+                const filaCabecera = cabecera.crearFilaCabecera();
+                tabla.appendChild(filaCabecera);
+
+                //Iteramos sobre cada modelo de producto
+                this.datos.forEach(modelo => {
+                    //Creamos una instancia de Secc para generar las filas en el modelo actual
+                    const instanciaSecc = new Secc('modelo', modelo.nombre, modelo.costes);
+                    const filaModelo = instanciaSecc.crearFilaModelo();
+                    tabla.appendChild(filaModelo);
+
+                    //Variable para el coste total de las partes
+                    let totalProducto = 0;
+
+                    //Iteramos a cada parte de Objeto actual para pillar el nombre y su coste
+                    for (const [costeNombre, costeValor] of Object.entries(modelo.costes)) {
+                        //Creamos una instancia de Secc para generar las filas en la parte actual
+                        const instanciaCoste = new Secc('coste', costeNombre, costeValor);
+                        const filaCoste = instanciaCoste.crearFilaCoste();
+                        tabla.appendChild(filaCoste);
+
+                        //Le vamos sumando a la variable anteriormente creada el valor de la parte actual
+                        totalProducto += costeValor;
+                    }
+
+                    // Calculamos el total del coste de las partes del producto actual y creamos la fila del total al final
+                    const instanciaTotalProducto = new Secc('total', null, totalProducto);
+                    const filaTotalProducto = instanciaTotalProducto.crearFilaTotal();
+                    tabla.appendChild(filaTotalProducto);
+                });
+            }
+        }
+
+
+        // Cadena 'bdDallo', contiene todos los costes en euros (materiales, mano de obra, etc...)
+        //  para realizar el escandallo de una serie de carteras de piel recibido desde una BBDD.
+
+        var bdDallo = `[{ "id": 1,
+                        "nombre": "cartera piel vacuno negra",
+                        "costes":{ "piel": 5,
+                                   "hilo": 0.80,
+                                   "rebaje": 1,
+                                   "pegamento": 0.50,
+                                   "pintura": 0.45,
+                                   "broches": 0.90,
+                                   "cosido": 1,
+                                   "fabricación": 15,
+                                   "embasado": 1}                
+                   },
+                   {    "id": 2,
+                        "nombre": "cartera piel vacuno azul",
+                        "costes":{ "piel": 6,
+                                   "hilo": 0.90,
+                                   "rebaje": 1.50,
+                                   "pegamento": 0.70,
+                                   "pintura": 0.50,
+                                   "broches": 0.80,
+                                   "cosido": 1.50,
+                                   "fabricación": 16,
+                                   "embasado": 1.20}                
+                   },
+                   {    "id": 3,
+                        "nombre": "cartera piel coco",
+                        "costes":{ "piel": 25,
+                                   "hilo": 1,
+                                   "rebaje": 1,
+                                   "pegamento": 0.70,
+                                   "pintura": 0.80,
+                                   "broches": 1,
+                                   "cosido": 3,
+                                   "fabricación": 20,
+                                   "embasado": 5}               
+                   }]`
+
+        //Creamos la tabla
+        const tablaProductos = new Tabla(bdDallo);
+        tablaProductos.renderizarTabla();
+
+    </script>
+</body>
+
+</html>
