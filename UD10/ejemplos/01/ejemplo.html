@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+    <meta charset="UTF-8">
+<body>
+    <button type="button" onclick="funAjax ()">Leer propiedad de archivo JSON</button>
+    <div id="datos"> </div>
+    <script>
+    function funAjax() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            let obj=JSON.parse(this.responseText);
+            document.getElementById("datos").innerHTML = obj[0].nombre;
+            }
+        }
+        xhttp.open("GET", "carteras.json", true);
+        xhttp.send();
+    }
+    </script>
+</body>
+</html>
