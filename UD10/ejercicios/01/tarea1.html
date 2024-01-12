@@ -7,65 +7,69 @@
     <title>Tarea 1 Tema 10</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            mostrarRegistros();
+            actualizarLista();
         });
 
-        function mostrarRegistros() {
-            //Creamos una instancia de XMLHttpRequest para generar los nomres en el campo select
-            var selectNombresXHTTP = new XMLHttpRequest();
-            selectNombresXHTTP.onreadystatechange = function () {
+        //Función funAjax para solo usar una isntancia de XMLHttpRequest
+        function funAjax(url, fun) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    var datos = JSON.parse(this.responseText);
-                    var select = document.getElementById("listaDesplegable");
-                    var tablaDiv = document.getElementById("tabla");
-
-                    //Agregamos opciones al select, el valor del campo seleccinado será la ID pero el texto será el nombre
-                    datos.forEach(function (dato) {
-                        var option = document.createElement("option");
-                        option.value = dato.id;
-                        option.text = dato.nombre;
-                        select.add(option);
-                    });
-
-                    //Manejamos el evento de cambio en el select
-                    select.addEventListener("change", function () {
-                        var idSeleccionado = select.value;
-
-                        //Realizamos una nueva solicitud AJAX para obtener los detalles del registro seleccionado
-                        var detallesRegistrosXHTTP = new XMLHttpRequest();
-                        detallesRegistrosXHTTP.onreadystatechange = function () {
-                            if (this.readyState == 4 && this.status == 200) {
-                                var infoRegistro = JSON.parse(this.responseText);
-
-                                //Creamos una tabla para mostrar los detalles
-                                var tableHTML = "<table border='1'>";
-
-                                //Iteramos sobre los detalles y creamos filas de tabla
-                                for (var key in infoRegistro[0]) {
-                                    tableHTML += "<tr>";
-                                    tableHTML += "<td><strong>" + key + "</strong></td>";
-                                    tableHTML += "<td>" + infoRegistro[0][key] + "</td>";
-                                    tableHTML += "</tr>";
-                                }
-
-                                //Cerramos la tabla
-                                tableHTML += "</table>";
-
-                                //Actualizamos la tablaDiv con la tabla HTML generada
-                                tablaDiv.innerHTML = tableHTML;
-                            }
-                        };
-
-                        //Hacemos la solicitud AJAX para obtener detalles
-                        detallesRegistrosXHTTP.open("GET", "base.php?id=" + idSeleccionado, true);
-                        detallesRegistrosXHTTP.send();
-                    });
+                    fun(JSON.parse(this.responseText));
                 }
             };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
 
-            //Hacemos la solicitud AJAX para obtener la lista de nombres
-            selectNombresXHTTP.open("GET", "base.php", true);
-            selectNombresXHTTP.send();
+        //Función para actualizar la lista con todos los nombres de la Base de Datos
+        function actualizarLista() {
+            funAjax("base.php", function (datos) {
+                var select = document.getElementById("listaDesplegable");
+
+                //Tenemos que cambiar el texto del select porque, de lo contrario, pillará elementos duplicados, ya que hacemos dos solicitudes de los mismos datos
+                select.innerHTML = "<option disabled selected>Selecciona un nombre</option>";
+
+                //Agregamos opciones al select, el valor del campo seleccionado será la ID pero el texto será el nombre
+                datos.forEach(function (dato) {
+                    var option = document.createElement("option");
+                    option.value = dato.id;
+                    option.text = dato.nombre;
+                    select.add(option);
+                });
+
+                //Manejamos el evento de cambio en el select
+                select.addEventListener("change", function () {
+                    var idSeleccionado = this.value;
+
+                    //Hacemos la solicitud para obtener detalles de los registros del idSeleccionado
+                    funAjax("base.php?id=" + idSeleccionado, function (infoRegistro) {
+                        mostrarRegistros(infoRegistro);
+                    });
+                });
+            });
+        }
+
+        //Función para mostrar la información de todos los registros
+        function mostrarRegistros(infoRegistro) {
+            var tablaDiv = document.getElementById("tabla");
+
+            //Creamos una tabla para mostrar los detalles
+            var tableHTML = "<table border='1'>";
+
+            //Iteramos sobre los detalles y creamos filas de tabla
+            for (var key in infoRegistro[0]) {
+                tableHTML += "<tr>";
+                tableHTML += "<td><strong>" + key + "</strong></td>";
+                tableHTML += "<td>" + infoRegistro[0][key] + "</td>";
+                tableHTML += "</tr>";
+            }
+
+            //Cerramos la tabla
+            tableHTML += "</table>";
+
+            //Colocamos la tabla en tablaDiv
+            tablaDiv.innerHTML = tableHTML;
         }
 
     </script>
@@ -73,7 +77,7 @@
 </head>
 
 <body>
-    <h3>Tarea 1 Tema 10</h3>
+    <h1>Tarea 1 Tema 10</h1>
     <select id="listaDesplegable">
         <option disabled selected>Selecciona un nombre</option>
     </select>
