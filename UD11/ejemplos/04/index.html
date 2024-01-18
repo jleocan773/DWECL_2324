@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+<script> 
+function promesa (fase,tiempo){
+  var promise = new Promise(function(resolve, reject) {
+    setTimeout(function (){resolve(`Etapa ${fase} completada`)}, tiempo)
+  })
+return promise;
+}
+
+const p1=promesa(1,3000);
+const p2=promesa(2,2000);
+const p3=promesa(3,5000);
+const p4=promesa(4,1000);
+Promise.race([p1, p2, p3,p4])
+  .then(mensaje => console.log(mensaje))
+  .catch(e => console.log(`Error capturado:  ${e}`));
+
+</script>
+</body>
+</html>

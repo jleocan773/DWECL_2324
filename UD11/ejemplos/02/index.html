@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+<script> 
+function promesa (fase){
+  var promise = new Promise(function(resolve, reject) {
+    setTimeout(function (){resolve(`Etapa ${fase} completada`)}, 3000)
+  })
+return promise;
+}
+
+promesa(1)
+.then(
+  function(mensaje){
+    console.log(mensaje);
+    return promesa (2);
+  })
+.then(
+  function(mensaje){
+    console.log(mensaje);
+    return promesa (3);
+  })
+.then(
+  function(mensaje){
+    console.log(mensaje);
+    return promesa (4);
+  })
+.then(
+  function(mensaje){
+    console.log(mensaje);
+  })
+.catch(e => console.log(`Error capturado:  ${e}`));
+
+</script>
+</body>
+</html>
