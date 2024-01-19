@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+<body>
+    <button type="button" onclick="funAjax ()">Envía parámetros por GET y recibe valores</button>
+    <div id="datos"> </div>
+    <script>
+    function funAjax() {
+        fetch("jsonGET.php?nombre=Juan&ciudad=Ubrique")
+        .then(result => result.json())
+        .then(function(obj){document.getElementById("datos").innerHTML =
+                         `Desde servidor ${obj.nombre} de ${obj.ciudad}`} )
+        .catch(e => console.log(`Error capturado:  ${e}`));
+        } 
+    </script>
+</body>
+</html>

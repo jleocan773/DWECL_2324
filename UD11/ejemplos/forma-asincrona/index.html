@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <script>
+    const pausa = t => new Promise(resolve => setTimeout(resolve, t));
+    async function espera() { // Ejecución de las pausas de forma asíncrona ..
+      const t1=pausa(1000);
+      const t2=pausa(1000);
+      await t1;
+      await t2;
+      console.log( "Tarda aprox., 1 segundo.");
+    }
+    espera();
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+    
+<script>
+
+async function carga() {
+let  sum = await import ('./exportSuma.js');
+console.log(sum.suma(1,2));
+}
+carga();
+
+
+
+</script>
+
+</body>
+</html>

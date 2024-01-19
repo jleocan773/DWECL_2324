@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 1 Tema 11</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            actualizarLista();
+        });
+
+        /* VERSIÓN XHTTP */
+
+        /* Para hacer esta función con Promesa no haría falta el segundo parámetro, ya que este es un callback que resolveremos con un .then */
+
+        // //Función funAjax para solo usar una isntancia de XMLHttpRequest
+        // function funAjax(url, fun) {
+        //     var xhttp = new XMLHttpRequest();
+        //     xhttp.onreadystatechange = function () {
+        //         if (this.readyState == 4 && this.status == 200) {
+        //             fun(JSON.parse(this.responseText));
+        //         }
+        //     };
+        //     xhttp.open("GET", url, true);
+        //     xhttp.send();
+        // }
+
+        /* Para hacer esta función con Promesa no haría falta el segundo parámetro, ya que este es un callback que resolveremos con un .then */
+
+        // //Función para actualizar la lista con todos los nombres de la Base de Datos
+        // function actualizarLista() {
+        //     funAjax("base.php", function (datos) {
+        //         var select = document.getElementById("listaDesplegable");
+
+        //         //Tenemos que cambiar el texto del select porque, de lo contrario, pillará elementos duplicados, ya que hacemos dos solicitudes de los mismos datos
+        //         select.innerHTML = "<option disabled selected>Selecciona un nombre</option>";
+
+        //         //Agregamos opciones al select, el valor del campo seleccionado será la ID pero el texto será el nombre
+        //         datos.forEach(function (dato) {
+        //             var option = document.createElement("option");
+        //             option.value = dato.id;
+        //             option.text = dato.nombre;
+        //             select.add(option);
+        //         });
+
+        //         //Manejamos el evento de cambio en el select
+        //         select.addEventListener("change", function () {
+        //             var idSeleccionado = this.value;
+
+        //             //Hacemos la solicitud para obtener detalles de los registros del idSeleccionado
+        //             funAjax("base.php?id=" + idSeleccionado, function (infoRegistro) {
+        //                 mostrarRegistros(infoRegistro);
+        //             });
+        //         });
+        //     });
+        // }
+
+        /* Este método no tendría ninguna modificación, ya que solo se encarga de la tabla HTML */
+
+        // //Función para mostrar la información de todos los registros
+        // function mostrarRegistros(infoRegistro) {
+        //     var tablaDiv = document.getElementById("tabla");
+
+        //     //Creamos una tabla para mostrar los detalles
+        //     var tableHTML = "<table border='1'>";
+
+        //     //Iteramos sobre los detalles y creamos filas de tabla
+        //     for (var key in infoRegistro[0]) {
+        //         tableHTML += "<tr>";
+        //         tableHTML += "<td><strong>" + key + "</strong></td>";
+        //         tableHTML += "<td>" + infoRegistro[0][key] + "</td>";
+        //         tableHTML += "</tr>";
+        //     }
+
+        //     //Cerramos la tabla
+        //     tableHTML += "</table>";
+
+        //     //Colocamos la tabla en tablaDiv
+        //     tablaDiv.innerHTML = tableHTML;
+        // }
+
+
+
+        /* VERSIÓN PROMISE */
+
+        // //Función funAjax con Promesa utilizando fetch
+        // function funAjax(url) {
+        //     //Return devuelve una Promesa
+        //     return fetch(url)
+        //         .then(response => {
+        //             //Pasamos esta Promesa a formato JSON
+        //             return response.json();
+        //         });
+        // }
+
+        // //Función para actualizar la lista con todos los nombres de la Base de Datos
+        // function actualizarLista() {
+        //     funAjax("base.php")
+        //         .then(function (datos) {
+        //             var select = document.getElementById("listaDesplegable");
+
+        //             //Tenemos que cambiar el texto del select porque, de lo contrario, pillará elementos duplicados, ya que hacemos dos solicitudes de los mismos datos
+        //             select.innerHTML = "<option disabled selected>Selecciona un nombre</option>";
+
+        //             //Agregamos opciones al select, el valor del campo seleccionado será la ID pero el texto será el nombre
+        //             datos.forEach(function (dato) {
+        //                 var option = document.createElement("option");
+        //                 option.value = dato.id;
+        //                 option.text = dato.nombre;
+        //                 select.add(option);
+        //             });
+
+        //             //Manejamos el evento de cambio en el select
+        //             select.addEventListener("change", function () {
+        //                 var idSeleccionado = this.value;
+
+        //                 //Hacemos la solicitud para obtener detalles de los registros del idSeleccionado
+        //                 funAjax("base.php?id=" + idSeleccionado)
+        //                     .then(function (infoRegistro) {
+        //                         mostrarRegistros(infoRegistro);
+        //                     })
+        //                     .catch(function (error) {
+        //                         console.error(error);
+        //                     });
+        //             });
+        //         });
+        // }
+
+        // //Función para mostrar la información de todos los registros
+        // function mostrarRegistros(infoRegistro) {
+        //     var tablaDiv = document.getElementById("tabla");
+
+        //     //Creamos una tabla para mostrar los detalles
+        //     var tableHTML = "<table border='1'>";
+
+        //     //Iteramos sobre los detalles y creamos filas de tabla
+        //     for (var key in infoRegistro[0]) {
+        //         tableHTML += "<tr>";
+        //         tableHTML += "<td><strong>" + key + "</strong></td>";
+        //         tableHTML += "<td>" + infoRegistro[0][key] + "</td>";
+        //         tableHTML += "</tr>";
+        //     }
+
+        //     //Cerramos la tabla
+        //     tableHTML += "</table>";
+
+        //     //Colocamos la tabla en tablaDiv
+        //     tablaDiv.innerHTML = tableHTML;
+        // }
+
+        /* VERSIÓN ASYNC */
+
+        //Función funAjax con Async
+        async function funAjax(url) {
+            try {
+                const response = await fetch(url);
+                const datos = await response.json();
+                return datos;
+            } catch (error) {
+                throw new Error("Error en la solicitud AJAX: " + error.message);
+            }
+        }
+
+        //Función para actualizar la lista con todos los nombres de la Base de Datos
+        function actualizarLista() {
+            funAjax("base.php")
+                .then(function (datos) {
+                    var select = document.getElementById("listaDesplegable");
+
+                    //Tenemos que cambiar el texto del select porque, de lo contrario, pillará elementos duplicados, ya que hacemos dos solicitudes de los mismos datos
+                    select.innerHTML = "<option disabled selected>Selecciona un nombre</option>";
+
+                    //Agregamos opciones al select, el valor del campo seleccionado será la ID pero el texto será el nombre
+                    datos.forEach(function (dato) {
+                        var option = document.createElement("option");
+                        option.value = dato.id;
+                        option.text = dato.nombre;
+                        select.add(option);
+                    });
+
+                    //Manejamos el evento de cambio en el select
+                    select.addEventListener("change", function () {
+                        var idSeleccionado = this.value;
+
+                        //Hacemos la solicitud para obtener detalles de los registros del idSeleccionado
+                        funAjax("base.php?id=" + idSeleccionado)
+                            .then(function (infoRegistro) {
+                                mostrarRegistros(infoRegistro);
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    });
+                });
+        }
+
+        //Función para mostrar la información de todos los registros
+        function mostrarRegistros(infoRegistro) {
+            var tablaDiv = document.getElementById("tabla");
+
+            //Creamos una tabla para mostrar los detalles
+            var tableHTML = "<table border='1'>";
+
+            //Iteramos sobre los detalles y creamos filas de tabla
+            for (var key in infoRegistro[0]) {
+                tableHTML += "<tr>";
+                tableHTML += "<td><strong>" + key + "</strong></td>";
+                tableHTML += "<td>" + infoRegistro[0][key] + "</td>";
+                tableHTML += "</tr>";
+            }
+
+            //Cerramos la tabla
+            tableHTML += "</table>";
+
+            //Colocamos la tabla en tablaDiv
+            tablaDiv.innerHTML = tableHTML;
+        }
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <h1>Tarea 1 Tema 10</h1>
+    <select id="listaDesplegable">
+        <option disabled selected>Selecciona un nombre</option>
+    </select>
+    <br>
+    <br>
+    <div id="tabla">
+        La tabla se cargará aquí...
+    </div>
+</body>
+
+</html>
