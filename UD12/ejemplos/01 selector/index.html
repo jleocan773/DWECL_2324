@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$("#demo").load('carteras.json'); // Carga todo el contenido del archivo en el elemento DIV con AJAX
+            //$.getJSON("carteras.json", function(data){alert(data[0].nombre);}) // Muestra el nombre del primer elemento del array de objetos devuelto por el archivo JSON, con AJAX 
+
+            // Consulta AJAX a un archivo PHP por GET ------------------------------
+            // $.get("jsonGET.php?nombre=Juan&ciudad=Ubrique",
+            //     function (objJSON) {
+            //         obj = JSON.parse(obj);
+            //         $("#demo").html(`Desde servidor ${obj.nombre} de ${obj.ciudad}`)
+            //     }
+            // );
+
+            // Consulta AJAX a un archivo PHP por POST ------------------------------
+            // $.post("jsonPOST.php",
+            //     {
+            //         nombre: 'Juan',
+            //         ciudad: 'Ubrique'
+            //     },
+            //     function (obj) {
+            //         obj = JSON.parse(obj);
+            //         $("#demo").html(`Desde servidor ${obj.nombre} de ${obj.ciudad}`)
+            //     }
+            // );
+
+            // Ejemplo equivalente al anterior, usando el método $.ajax(), y especificando el tipo de consulta POST.
+            $.ajax({
+                'type': "POST",
+                'url': "jsonPOST.php",
+                'data': {
+                    nombre: 'Juan',
+                    ciudad: 'Ubrique'
+                },
+                'success': function (obj) {
+                    obj = JSON.parse(obj);
+                    $("#demo").html(`Desde servidor ${obj.nombre} de ${obj.ciudad}`)
+                }
+            });
+
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="demo"></div>
+</body>
+
+</html>

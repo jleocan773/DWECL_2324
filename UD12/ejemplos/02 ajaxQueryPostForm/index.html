@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(function() {
+            $("#myForm").submit(function(event){
+                    event.preventDefault(); //prevent default action 
+                    var post_url = "jsonPOST.php";
+                    var form_data = $("#myForm").serialize(); //Codifica datos del formulario para envío.
+                    $.post(post_url, 
+                        form_data, 
+                        function( obj) {
+                            obj=JSON.parse(obj);
+                            $("#demo").html(`Desde servidor ${obj.nombre} de ${obj.ciudad}`)
+                    });
+            });
+
+    });
+    </script>
+</head>
+<body>
+    <form id="myForm">
+        <label>Nombre: <input name="nombre"></label>
+        <label>Ciudad: <input name="ciudad"></label>
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="demo"></div>
+</body>
+</html>

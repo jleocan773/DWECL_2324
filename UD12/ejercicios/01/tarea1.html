@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 1 Tema 12</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        //Función funAjax con jQuery
+        function funAjax(url) {
+            return $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json"
+            });
+        }
+
+        $(document).ready(function () {
+            actualizarLista();
+
+            //Evento de cambio en el select
+            $("#listaDesplegable").change(function () {
+                var idSeleccionado = $(this).val();
+
+                //Hacemos la solicitud para obtener detalles de los registros del idSeleccionado
+                funAjax("base.php?id=" + idSeleccionado)
+                    .then(function (infoRegistro) {
+                        mostrarRegistros(infoRegistro);
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            });
+        });
+
+
+        //Función para actualizar la lista con todos los nombres de la Base de Datos
+        function actualizarLista() {
+            funAjax("base.php")
+                .then(function (datos) {
+                    var select = $("#listaDesplegable");
+
+                    //Tenemos que cambiar el texto del select porque, de lo contrario, pillará elementos duplicados, ya que hacemos dos solicitudes de los mismos datos
+                    select.html("<option disabled selected>Selecciona un nombre</option>");
+
+                    //Agregamos opciones al select, el valor del campo seleccionado será la ID pero el texto será el nombre
+                    $.each(datos, function (index, dato) {
+                        select.append("<option value='" + dato.id + "'>" + dato.nombre + "</option>");
+                    });
+                });
+        }
+
+        //Función para mostrar la información de todos los registros
+        function mostrarRegistros(infoRegistro) {
+            var tablaDiv = $("#tabla");
+
+            //Creamos una tabla para mostrar los detalles
+            var tableHTML = "<table border='1'>";
+
+            //Iteramos sobre los detalles y creamos filas de tabla
+            $.each(infoRegistro[0], function (key, value) {
+                tableHTML += "<tr>";
+                tableHTML += "<td><strong>" + key + "</strong></td>";
+                tableHTML += "<td>" + value + "</td>";
+                tableHTML += "</tr>";
+            });
+
+            //Cerramos la tabla
+            tableHTML += "</table>";
+
+            //Colocamos la tabla en tablaDiv
+            tablaDiv.html(tableHTML);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Tarea 1 Tema 12</h1>
+    <select id="listaDesplegable">
+        <option disabled selected>Selecciona un nombre</option>
+    </select>
+    <br>
+    <br>
+    <div id="tabla">
+        La tabla se cargará aquí...
+    </div>
+</body>
+
+</html>

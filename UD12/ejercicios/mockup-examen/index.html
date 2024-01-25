@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            function funAjax(e) {
+                e.preventDefault(); // Para no abandonar la página al enviar formulario.
+
+                //--------- Ajax con Promesas -----------------------------------------
+
+                //Obtener datos del formulario
+                var marca = $("#marca").val();
+                var modelo = $("#modelo").val();
+
+                //Crear objeto con los datos del formulario
+                var formData = {
+                    marca: marca,
+                    modelo: modelo
+                };
+
+                //Realizar la solicitud AJAX por POST con promesas
+                var ajaxPromise = new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: "jsonPOST.php",
+                        type: "POST",
+                        data: formData,
+                        dataType: "json",
+                        success: function (data) {
+                            resolve(data);
+                        },
+                        error: function (error) {
+                            reject(error);
+                        }
+                    });
+                });
+
+                //Manejar el resultado de la promesa
+                ajaxPromise.then(function (data) {
+                    //Mostrar mensaje con los datos recibidos desde el servidor
+                    $("#datos").html("<h1>" + data.mensaje + "</h1>");
+                }).catch(function (error) {
+                    //Manejar errores si los hay
+                    console.error(error);
+                });
+
+
+
+                //----------------------------------------------------------------------
+
+                // ---------Ajax con jQuery---------------------------------------------
+
+
+
+
+                //----------------------------------------------------------------------
+
+            }
+            $('form').submit(funAjax);
+        })
+    </script>
+</head>
+
+<body>
+    <form>
+        <label>Marca:</label><input type="text" id="marca" required="required">
+        <label>Modelo:</label><input type="text" id="modelo" required="required">
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="datos"> </div>
+
+</body>
+
+</html>
