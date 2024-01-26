@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            function funAjax(e) {
+                e.preventDefault(); // Para no abandonar la página al enviar formulario.
+
+
+
+                //--------- Ajax con Promesas -----------------------------------------
+
+                //Declaramos las variables para el POST
+                var marca = $('#marca').val();
+                var modelo = $('#modelo').val();
+                var datos = {
+                    marca: marca,
+                    modelo: modelo
+                };
+
+                // fetch('jsonPOST.php', {
+                //     method: 'POST',
+                //     body: JSON.stringify(datos)
+                // })
+                //     .then(response => response.text())
+                //     .then(jsonString => JSON.parse(jsonString))
+                //     .then(data => {
+                //         //Para la mejorar la única línea que debemos de moficar es esta
+                //         //Creamos una variable que contendrá el valor introducido en el formulario
+                //         var nuevaFila = '<tr><td>' + data.marca + '</td><td>' + data.modelo + '</td></tr>';
+                //         //Añadimos esta nueva fila a la tabla
+                //         $('#tablaResultados').append(nuevaFila);
+                //     })
+                //     .catch(error => console.error('Error:', error));
+
+                //----------------------------------------------------------------------
+
+                // ---------Ajax con jQuery---------------------------------------------
+
+                $.post('jsonPOST.php', datos, function (data) {
+                        //Para la mejorar la única línea que debemos de moficar es esta
+                        //Creamos una variable que contendrá el valor introducido en el formulario
+                        var nuevaFila = '<tr><td>' + data.marca + '</td><td>' + data.modelo + '</td></tr>';
+                        //Añadimos esta nueva fila a la tabla
+                        $('#tablaResultados').append(nuevaFila);
+                }, 'json');
+
+                //----------------------------------------------------------------------
+
+            }
+            $('form').submit(funAjax);
+        })
+    </script>
+</head>
+
+<body>
+    <form>
+        <label>Marca:</label><input type="text" id="marca" required="required">
+        <label>Modelo:</label><input type="text" id="modelo" required="required">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <br>
+
+    <!-- Creamos una tabla para mostrar los resultados -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+            </tr>
+        </thead>
+        <!-- Aquí es dónde mostraremos dinámicamente los resultados -->
+        <tbody id="tablaResultados">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
