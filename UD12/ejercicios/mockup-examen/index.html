@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,51 +9,38 @@
             function funAjax(e) {
                 e.preventDefault(); // Para no abandonar la página al enviar formulario.
 
+
+
                 //--------- Ajax con Promesas -----------------------------------------
 
-                //Obtener datos del formulario
-                var marca = $("#marca").val();
-                var modelo = $("#modelo").val();
-
-                //Crear objeto con los datos del formulario
-                var formData = {
+                //Declaramos las variables para el POST
+                var marca = $('#marca').val();
+                var modelo = $('#modelo').val();
+                var datos = {
                     marca: marca,
                     modelo: modelo
                 };
 
-                //Realizar la solicitud AJAX por POST con promesas
-                var ajaxPromise = new Promise(function (resolve, reject) {
-                    $.ajax({
-                        url: "jsonPOST.php",
-                        type: "POST",
-                        data: formData,
-                        dataType: "json",
-                        success: function (data) {
-                            resolve(data);
-                        },
-                        error: function (error) {
-                            reject(error);
-                        }
-                    });
-                });
-
-                //Manejar el resultado de la promesa
-                ajaxPromise.then(function (data) {
-                    //Mostrar mensaje con los datos recibidos desde el servidor
-                    $("#datos").html("<h1>" + data.mensaje + "</h1>");
-                }).catch(function (error) {
-                    //Manejar errores si los hay
-                    console.error(error);
-                });
-
-
+                fetch('jsonPOST.php', {
+                    method: 'POST',
+                    body: JSON.stringify(datos)
+                })
+                    .then(response => response.text())
+                    .then(jsonString => JSON.parse(jsonString))
+                    .then(data => {
+                        //Cogemos el contenido que hay en el div con id "datos" y lo sustituimos por la informacion
+                        $('#datos').html('<h1> El coche es un ' + data.marca + ' ' + data.modelo + '</h1>');
+                    })
+                    .catch(error => console.error('Error:', error));
 
                 //----------------------------------------------------------------------
 
                 // ---------Ajax con jQuery---------------------------------------------
 
-
-
+                // $.post('jsonPOST.php', datos, function (data) {
+                //     //Cogemos el contenido que hay en el div con id "datos" y lo sustituimos por la informacion
+                //     $('#datos').html('<h1> El coche es un ' + data.marca + ' ' + data.modelo + '</h1>');
+                // }, 'json');
 
                 //----------------------------------------------------------------------
 
