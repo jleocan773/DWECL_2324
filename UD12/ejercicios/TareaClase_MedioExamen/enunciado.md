@@ -1,0 +1,2 @@
+Dado un archivo json, cuyo contenido es un array de objetos, vamos a hacer un renderizado del contenido a través de AJAX de dos formas, primero con promesas y segundo con los métodos de JQuery.
+Se renderizará en una tabla respetando los campos según el array de objetos, además calcularemos el total de los costes de cada cartera.

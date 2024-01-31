@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .centra {
+            border: 1px solid grey;
+            text-align: center;
+        }
+
+        .borde {
+            border: 1px solid grey;
+        }
+
+        .negrita {
+            font-weight: bold;
+        }
+
+        td:hover {
+            background-color: aquamarine;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+
+<body>
+    <script>
+
+        // VERSIÓN CON PROMMISES
+        //Función para realizar la solicitud fetch y devolver una Promesa con los datos
+        // function obtenerDatos() {
+        //     return fetch('carteras.json')
+        //         .then(response => response.json());
+        // }
+
+        //VERSIÓN CON JQUERY
+        //Función para realizar la solicitud AJAX y llamar al callback con los datos
+        function obtenerDatos(callback) {
+            $.getJSON('carteras.json', function (data) {
+                callback(data);
+            });
+        }
+
+        //Método para renderizar la tabla
+        function renderizarTabla(datos) {
+            const tabla = $('<table>').appendTo('body');
+
+            //Crear cabecera
+            const filaCabecera = $('<tr>').appendTo(tabla);
+            $('<th>', { class: 'centra', text: 'ID' }).appendTo(filaCabecera);
+            $('<th>', { class: 'centra', text: 'Nombre' }).appendTo(filaCabecera);
+            $('<th>', { class: 'centra', text: 'CostoParte' }).appendTo(filaCabecera);
+
+            //Iterar sobre cada modelo de producto
+            datos.forEach(modelo => {
+                //Crear una fila para el modelo y su nombre
+                const filaModelo = $('<tr>').appendTo(tabla);
+                $('<td>', { class: 'centra', text: modelo.id }).appendTo(filaModelo);
+                $('<td>', { class: 'centra negrita', text: modelo.nombre }).appendTo(filaModelo);
+                $('<td>', { class: 'centra', text: '' }).appendTo(filaModelo);
+
+                //Variable para el coste total de las partes
+                let totalProducto = 0;
+
+                //Iterar sobre cada parte del objeto actual para obtener el nombre y su coste
+                for (const [costeNombre, costeValor] of Object.entries(modelo.costes)) {
+                    //Crear una fila para la parte actual
+                    const filaCoste = $('<tr>').appendTo(tabla);
+                    $('<td>', { class: 'centra', text: '' }).appendTo(filaCoste);
+                    $('<td>', { class: 'borde', text: costeNombre }).appendTo(filaCoste);
+                    $('<td>', { class: 'centra', text: costeValor }).appendTo(filaCoste);
+
+                    //Sumar el valor de la parte actual a la variable totalProducto
+                    totalProducto += costeValor;
+                }
+
+                //Calcular el total del coste de las partes del producto actual y crear la fila del total al final
+                const filaTotalProducto = $('<tr>').appendTo(tabla);
+                $('<td>', { class: 'centra', text: '' }).appendTo(filaTotalProducto);
+                $('<td>', { class: 'centra', text: 'Total' }).appendTo(filaTotalProducto);
+                $('<td>', { class: 'centra', text: totalProducto.toFixed(2) + ' €' }).appendTo(filaTotalProducto);
+            });
+        }
+
+
+        //LLamada con versión Promises
+        // obtenerDatos()
+        //     .then(datos => {
+        //         //Llamar a la función renderizarTabla con los datos obtenidos
+        //         renderizarTabla(datos);
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+
+
+        //Llamada con versión JQuery
+        obtenerDatos(function (datos) {
+            //Llamar a la función renderizarTabla con los datos obtenidos
+            renderizarTabla(datos);
+        });
+
+    </script>
+</body>
+
+</html>

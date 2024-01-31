@@ -1,0 +1,47 @@
+[
+	{
+		"id": 1,
+		"nombre": "cartera piel vacuno negra",
+		"costes": {
+			"piel": 5,
+			"hilo": 0.8,
+			"rebaje": 1,
+			"pegamento": 0.5,
+			"pintura": 0.45,
+			"broches": 0.9,
+			"cosido": 1,
+			"fabricación": 15,
+			"embasado": 1
+		}
+	},
+	{
+		"id": 2,
+		"nombre": "cartera piel vacuno azul",
+		"costes": {
+			"piel": 6,
+			"hilo": 0.9,
+			"rebaje": 1.5,
+			"pegamento": 0.7,
+			"pintura": 0.5,
+			"broches": 0.8,
+			"cosido": 1.5,
+			"fabricación": 16,
+			"embasado": 1.2
+		}
+	},
+	{
+		"id": 3,
+		"nombre": "cartera piel coco",
+		"costes": {
+			"piel": 25,
+			"hilo": 1,
+			"rebaje": 1,
+			"pegamento": 0.7,
+			"pintura": 0.8,
+			"broches": 1,
+			"cosido": 3,
+			"fabricación": 20,
+			"embasado": 5
+		}
+	}
+]
