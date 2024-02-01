@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            function funAjax(e) {
+                e.preventDefault(); // Para no abandonar la página al enviar formulario.
+
+                //--------- Con Promesas--------------------------------------------------------
+
+                //Usamos JQuery para obtener los valores introducidos por el usuario en los campos con id "equipo1" y "equipo2"
+                var equipo1 = $('#equipo1').val();
+                var equipo2 = $('#equipo2').val();
+
+                //Función para petición con Promesa
+                function hacerPeticionPromesa() {
+                    //La variable "datos" contendrá la información de cada equipo
+                    var datos = {
+                        equipo1: equipo1,
+                        equipo2: equipo2
+                    };
+
+                    //Solicitud con Fetch POST
+                    return fetch('jsonPOST.php', {
+                        method: 'POST',
+
+                        //JSON.stringify convierte el objeto "datos" a formato JSON
+                        body: JSON.stringify(datos)
+                    })
+                        //Y nos acaba devolviendo un objeto de Javascript
+                        .then(response => response.json());
+                }
+
+                //Función para generar la tabla con los datos recibidios
+                hacerPeticionPromesa()
+                    .then(function (response) {
+                        //Debemos limpiar el contenido de #datos, ya que si no acabaremos con duplicados
+                        $('#datos').empty();
+
+                        //Generamos dinámicamente cada integrante en su equipo
+                        //Asumimos que los equipos van a tener la misma cantidad de integrantes,
+                        //por lo que podemos usar la longitud de cualquier respuesta para recorrer los integrantes
+                        for (var i = 0; i < response.equipo1.length; i++) {
+                            var alumnoEquipo1 = '<td>' + response.equipo1[i] + '</td>';
+                            var alumnoEquipo2 = '<td>' + response.equipo2[i] + '</td>';
+                            $('#datos').append('<tr>' + alumnoEquipo1 + alumnoEquipo2 + '</tr>');
+                        }
+
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                    });
+
+
+                //-------------------------------------------------------------------------------
+
+
+                // // -------Con jQuery----------------------------------------------------------
+
+
+                // $.post('jsonPOST.php', { equipo1: equipo1, equipo2: equipo2 }, function (response) {
+                //     //Limpiar las celdas existentes en las filas de Equipo1 y Equipo2
+                //     $('#datos tr').empty();
+
+                //     //Generar dinámicamente cada integrante en su equipo
+                //     response.equipo1.forEach(function (alumnoEquipo1, i) {
+                //         //Asumimos que los equipos van a tener la misma cantidad de integrantes,
+                //         //así que podemos usar esto para obtener al mismo  tiempo el integrante correspondiente del otro equipo
+                //         var alumnoEquipo2 = response.equipo2[i];
+                //         //Agragamos los integrantes en su equipo respectivo
+                //         $('#datos').append('<tr><td>' + alumnoEquipo1 + '</td><td>' + alumnoEquipo2 + '</td></tr>');
+                //     });
+                // }, 'json');
+
+
+
+
+                // //----------------------------------------------------------------------------
+
+            }
+            $('form').submit(funAjax);
+        })
+    </script>
+</head>
+
+<body>
+    <form>
+        <label>ID_Equipo1:</label><input type="number" min=1 id="equipo1" required="required">
+        <label>ID_Equipo2:</label><input type="number" min=1 id="equipo2" required="required">
+        <button type="submit">Enviar</button>
+    </form>
+    <br />
+
+    <table>
+        <thead>
+            <tr>
+                <th>Equipo1</th>
+                <th>Equipo2</th>
+            </tr>
+        </thead>
+        <tbody id="datos">
+        </tbody>
+    </table>
+
+</body>
+
+</html>
