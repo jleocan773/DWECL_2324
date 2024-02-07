@@ -44,12 +44,12 @@ const grupoBotones = new GrupoBotones();
 
 //Manejo de eventos
 $(function() {
-    //Evento click para añadir botón
+    //Evento clic para añadir botón
     $(".botonAdd").on("click", () => {
         grupoBotones.add();
     });
 
-    //Evento click para quitar botón
+    //Evento clic para quitar botón
     $(".botonDelete").on("click", () => {
         grupoBotones.rest();
     });
