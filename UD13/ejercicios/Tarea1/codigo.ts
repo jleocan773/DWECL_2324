@@ -1,36 +1,57 @@
-interface generadorBotones {
+interface GeneradorBotones {
 	add(): void;
 	rest(): void;
 }
 
-//Esta clase se encargará de crear los botones, además de las alertas
+//Clase para crear un botón
 class Boton {
-	constructor(contador: number) {
+	constructor(private contador: number) {
 		//Creamos un botón con JQuery
 		const boton = $("<button>")
-			//El texto será Botón + el número del contador
+			//El texto será "Botón" + el número del contador
 			.text(`Botón ${contador}`)
-			//Cuando se hace click, se ejecuta la alerta
+			//Cuando se hace clic, se ejecuta la alerta
 			.on("click", () => {
 				alert(`Soy el botón ${contador}`);
 			});
 
-		//Agregamos el botón a "zonaBotonees"
-		$(".zonaBotonees").append(boton);
+		//Agregamos el botón al elemento con clase "zonaBotones"
+		$(".zonaBotones").append(boton);
 	}
 }
 
-class GrupoBotones implements generadorBotones {
+//Clase principal para manejar la generación de botones
+class GrupoBotones implements GeneradorBotones {
 	public contador: number = 0;
 
-    //Este metodo se encargará de añadir botones
-    add(): void {
-        //Aumentamos el contador y creamos el botón con ese contador
-        this.contador++;
-        new Boton(this.contador);
-    }
+	//Este método se encargará de añadir botones
+	add(): void {
+		//Aumentamos el contador y creamos el botón con ese contador
+		this.contador++;
+		new Boton(this.contador);
+	}
 
-    rest(): void {
-        
-    }
+	//Este método se encargará de quitar botones
+	rest(): void {
+		//Disminuimos el contador y eliminamos el último botón creado con children().last()
+		this.contador--;
+		$(".zonaBotones").children().last().remove();
+	}
 }
+
+//Instanciamos la clase GrupoBotones
+const grupoBotones = new GrupoBotones();
+
+//Manejo de eventos
+$(function() {
+    //Evento click para añadir botón
+    $(".botonAdd").on("click", () => {
+        grupoBotones.add();
+    });
+
+    //Evento click para quitar botón
+    $(".botonDelete").on("click", () => {
+        grupoBotones.rest();
+    });
+});
+
