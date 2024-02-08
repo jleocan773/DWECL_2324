@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "formidable": "^3.5.1",
+    "slugify": "^1.6.6"
+  }
+}
