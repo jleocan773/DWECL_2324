@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación MongoDB</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarea 2 Tema 14</title>
+    <style>
+        #tablaDatos {
+            border: 1px solid black;
+        }
+    </style>
+    <script src="index.js" defer></script>
 </head>
+
 <body>
-    <h1>Aplicación MongoDB</h1>
-    <form id="formulario">
-        <label for="inputNombre">Nombre: </label>
-        <input type="text" id="inputNombre" name="nombre">
-
-        <label for="inputApellido">Apellido: </label>
-        <input type="text" id="inputApellido" name="apellido">
-
-        <button id="botonEnviar" type="submit">Añadir Registro</button>
-    </form>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombreInput">
     <br>
-    <table id="tablaRegistros">
+    <br>
+    <label for="apellidos">Apellidos</label>
+    <input type="text" id="apellidosInput">
+    <br>
+    <br>
+    <button type="submit" id="enviarBtn">Enviar</button>
+    <br>
+    <br>
+    <table id="tablaDatos" border=4>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <td>Nombre</td>
+                <td>Apellidos</td>
             </tr>
         </thead>
-        <tbody id="tablaCuerpo">
-            <!-- Aquí se agregarán los registros dinámicamente -->
-        </tbody>
+        <tbody id="cuerpoTabla"></tbody>
     </table>
-    
-    <script src="cliente.js"></script>
 </body>
+
 </html>
