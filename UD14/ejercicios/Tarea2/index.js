@@ -1,58 +1,81 @@
+//Cargamos los elementos interactuables del documento
 document.addEventListener("DOMContentLoaded", () => {
-    let nombreInput = document.getElementById("nombreInput");
-    let apellidoInput = document.getElementById("apellidoInput");
-    let enviarBtn = document.getElementById("enviarBtn");
-    let cuerpoTabla = document.getElementById("cuerpoTabla");
+  const nombreInput = document.getElementById("nombreInput");
+  const apellidosInput = document.getElementById("apellidosInput");
+  const enviarBtn = document.getElementById("enviarBtn");
+  const cuerpoTabla = document.getElementById("cuerpoTabla");
 
-    let obtenerDocumentos = async () => {
-        let response = await fetch("/mostrarDatos");
-        let documentos = await response.json();
-        actualizarTabla(documentos);
-    };
+  //Declaramos la función obtenerDocumentos, que se encargará de recibir los datos de mongoDB y de mostrarlos en la tabla
+  async function obtenerDocumentos() {
+    //Recibimos los datos de la base de datos desde la página /mostrarDatos
+    const response = await fetch("/mostrarDatos");
 
-    // enviarDocumento obtiene los datos introducidos (que se encuentran en addDatos) y luego
-    // los envía al método actualizarTabla para mostrarlos.
-    let enviarDocumento = async () => {
-        let nombre = nombreInput.value;
-        let apellidos = apellidoInput.value;
-        if (nombre && apellidos) {
-            try {
-                await fetch("/addDatos", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ nombre, apellidos }),
-                });
-                nombreInput.value = "";
-                apellidoInput.value = "";
-                obtenerDocumentos();
-            } catch (error) {
-                console.error("Error al enviar documento:", error);
-            }
-        } else {
-            alert("Por favor, complete ambos campos.");
-        }
-    };
+    //Pasamos esta información a formato json
+    const documentos = await response.json();
 
-    // Obtiene los datos de la base de datos junto con los nuevos datos introducidos por los input de
-    // nombre y apellido, luego recorre todos los datos y los muestra en la tabla uno a uno.
-    let actualizarTabla = (documentos) => {
-        cuerpoTabla.innerHTML = "";
-        documentos.forEach((documento) => {
-            let fila = document.createElement("tr");
-            let nombreCelda = document.createElement("td");
-            let apellidoCelda = document.createElement("td");
-            nombreCelda.textContent = documento.nombre;
-            apellidoCelda.textContent = documento.apellidos;
-            fila.appendChild(nombreCelda);
-            fila.appendChild(apellidoCelda);
-            cuerpoTabla.appendChild(fila);
+    //Ejecutamos la función actualizarTabla con estos datos
+    actualizarTabla(documentos);
+  }
+
+  //Declaramos la función enviarDocumento(), que se encargará de enviar los datos del input al servidor
+  async function enviarDocumento() {
+    //Como hemos hecho un formulario, tenemos que parar el evento por defecto de envío de formulario
+    event.preventDefault();
+    //Pillamos el valor de los input
+    const nombre = nombreInput.value;
+    const apellidos = apellidosInput.value;
+
+    //Si se han introducido tanto nombre como apellidos, se añaden estos datos mediante /addDatos
+    if (nombre && apellidos) {
+      try {
+        await fetch("/addDatos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ nombre, apellidos }),
         });
-    };
 
-    // Al enviar los datos por los input, se activa "enviarDocumento"
-    enviarBtn.addEventListener("click", enviarDocumento);
+        //Después de haber añadido este nuevo documento, volvemos a poner los input vacíos y volvemos a recupera todos los datos con obtenerDocumentos()
+        nombreInput.value = "";
+        apellidosInput.value = "";
+        obtenerDocumentos();
+      } catch (error) {
+        console.error("Fallo al enviar documento: ", error);
+      }
+    } else {
+      alert("Ambos campos son obligatorios.");
+    }
+  }
 
-    obtenerDocumentos();
+  //Declaramos la función actualizarTabla(), que se encargará de actualizar la tabla según los documentos recibidos
+  function actualizarTabla(documentos) {
+    //Limpiamos la tabla para que no se dupliquen los datos
+    cuerpoTabla.innerHTML = "";
+
+    //Para construir la tabl hacemos un bucle por cada documento
+    documentos.forEach((documento) => {
+      //Creamos una nueva fila, una celda para el nombre y otra para los apellidos
+      const fila = document.createElement("tr");
+      const nombreCelda = document.createElement("td");
+      const apellidoCelda = document.createElement("td");
+
+      //Asignamos el nombre y los apellidos a las celdas
+      nombreCelda.textContent = documento.nombre;
+      apellidoCelda.textContent = documento.apellidos;
+
+      //Anidamos las celdas a la fila
+      fila.appendChild(nombreCelda);
+      fila.appendChild(apellidoCelda);
+
+      //Anidamos la fila a la tabla
+      cuerpoTabla.appendChild(fila);
+    });
+  }
+
+  //Añadimos el evento enviarDocumento() cuando se pulsa el botón
+  enviarBtn.addEventListener("click", enviarDocumento);
+
+  //Ejecutamos la función obtenerDocumentos() al iniciar la página
+  obtenerDocumentos();
 });

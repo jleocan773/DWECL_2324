@@ -2,38 +2,98 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarea 2 Tema 14</title>
     <style>
-        #tablaDatos {
-            border: 1px solid black;
+        body {
+            font-family: Arial;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
         }
     </style>
-    <script src="index.js" defer></script>
 </head>
 
 <body>
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombreInput">
-    <br>
-    <br>
-    <label for="apellidos">Apellidos</label>
-    <input type="text" id="apellidosInput">
-    <br>
-    <br>
-    <button type="submit" id="enviarBtn">Enviar</button>
-    <br>
-    <br>
-    <table id="tablaDatos" border=4>
-        <thead>
-            <tr>
-                <td>Nombre</td>
-                <td>Apellidos</td>
-            </tr>
-        </thead>
-        <tbody id="cuerpoTabla"></tbody>
-    </table>
+    <main>
+        <h1>Formulario de Datos</h1>
+
+        <form id="formulario">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombreInput" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidosInput" required>
+
+            <button id="enviarBtn">Enviar</button>
+        </form>
+
+        <br>
+
+        <h2>Datos Registrados</h2>
+
+        <table id="tablaDatos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla"></tbody>
+        </table>
+
+    </main>
+    <script src="index.js" defer></script>
 </body>
 
 </html>
