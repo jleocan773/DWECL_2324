@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nombre = nombreInput.value;
     const apellidos = apellidosInput.value;
 
-    //Si se han introducido tanto nombre como apellidos, se añaden estos datos mediante /addDatos
+    //Si se ha introducido tanto nombre como apellidos, se añaden estos datos mediante /addDatos
     if (nombre && apellidos) {
       try {
         await fetch("/addDatos", {

@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import express from "express";
 import path from "path";
 
-//Creamos las constantes necesarias para realizar las peticines a mongoDB
+//Creamos las constantes necesarias para realizar las peticiones a mongoDB
 const app = express();
 const uri =
   "mongodb+srv://jleocan773:K2eXak6I0DU9WIq2@cluster0.jmw3avr.mongodb.net/tarea2?retryWrites=true&w=majority";
