@@ -1,0 +1,29 @@
+.example-card {
+  width: 400px;
+  display: flex;
+}
+
+.example-card img {
+  width: 400px;
+  height: 400px;
+  background-size: cover;
+}
+
+.example-card .avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  object-fit: cover;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  border-radius: 50px;
+  background-color: aquamarine;
+}

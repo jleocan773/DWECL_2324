@@ -1,0 +1,15 @@
+mat-form-field{
+    margin-right: 25px;
+}
+
+#surname{
+    width: 350px;
+}
+
+#address1, #address2{
+    width: 500px;
+}
+
+.action_buttons{
+    margin-left: 22em;
+}
