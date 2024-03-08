@@ -6,7 +6,7 @@ import path from "path";
 //Creamos las constantes necesarias para realizar las peticiones a mongoDB
 const app = express();
 const uri =
-  "mongodb+srv://jleocan773:K2eXak6I0DU9WIq2@cluster0.jmw3avr.mongodb.net/tarea2?retryWrites=true&w=majority";
+  "mongodb+srv://jleocan773:3RP38QZeiGdJS1ra@cluster0.rv6wfcz.mongodb.net/";
 const client = new MongoClient(uri);
 app.use(express.json());
 
